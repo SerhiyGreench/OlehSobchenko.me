@@ -309,21 +309,90 @@ const renderTitle = (options) => {
  */
 const renderDescription = (options) => {
   const { rootElement, lang, post } = options;
+  const shortDescription = post.shortDescription;
   const description = post.description;
 
-  if (!description) {
+  if (!description && !shortDescription) {
     return;
   }
 
-  const descriptionElement = document.createElement('div');
+  const descriptionContainerElement = document.createElement('div');
 
-  descriptionElement.innerText = description[lang];
-  descriptionElement.classList.add('post-description');
-  rootElement.appendChild(descriptionElement);
+  if (shortDescription) {
+    const shortDescriptionElement = document.createElement('span');
+    const spaceElement = document.createElement('span');
+
+    spaceElement.innerText = ' ';
+
+    shortDescriptionElement.innerHTML = shortDescription[lang];
+    descriptionContainerElement.append(shortDescriptionElement, spaceElement);
+  }
+
+  if (description) {
+    const descriptionElement = document.createElement('span');
+
+    descriptionElement.innerHTML = description[lang];
+    descriptionContainerElement.appendChild(descriptionElement);
+  }
+
+  descriptionContainerElement.classList.add('post-description');
+  rootElement.appendChild(descriptionContainerElement);
 };
 
 /**
- * Renders post short description
+ * Renders post audio
+ *
+ * @param {PostRenderOptions} options
+ * @returns {void}
+ */
+const renderAudio = (options) => {
+  const { rootElement, lang, post } = options;
+  const audio = post.audio;
+
+  if (!audio) {
+    return;
+  }
+
+  const audioContainerElement = document.createElement('div');
+
+  const audioIconElement = document.createElement('div');
+
+  audioIconElement.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+  `;
+  audioIconElement.classList.add('post-audio-icon');
+  audioContainerElement.appendChild(audioIconElement);
+
+  if (audio.name || audio.description) {
+    const postAudioText  = document.createElement('div');
+
+    if (audio.name) {
+      const audioNameElement = document.createElement('div');
+
+      audioNameElement.innerText =
+        getLocalized(audio.name, lang)?.toUpperCase();
+      audioNameElement.classList.add('post-audio-name');
+      postAudioText.appendChild(audioNameElement);
+    }
+
+    if (audio.description) {
+      const audioDescriptionElement = document.createElement('div');
+
+      audioDescriptionElement.innerText = getLocalized(audio.description, lang);
+      audioDescriptionElement.classList.add('post-audio-description');
+      postAudioText.appendChild(audioDescriptionElement);
+    }
+
+    postAudioText.classList.add('post-audio-text');
+    audioContainerElement.appendChild(postAudioText);
+  }
+
+  audioContainerElement.classList.add('post-audio');
+  rootElement.appendChild(audioContainerElement);
+};
+
+/**
+ * Renders post quote
  *
  * @param {PostRenderOptions} options
  * @returns {void}
@@ -344,6 +413,46 @@ const renderQuote = (options) => {
   quoteElement.appendChild(blockquoteElement);
   quoteElement.classList.add('post-quote');
   rootElement.appendChild(quoteElement);
+};
+
+/**
+ * Renders post link
+ *
+ * @param {PostRenderOptions} options
+ * @returns {void}
+ */
+const renderLink = (options) => {
+  const { rootElement, lang, post } = options;
+  const link = post.link;
+
+  if (!link) {
+    return;
+  }
+
+  const linkContainerElement = document.createElement('div');
+  const url = getLocalized(post.link.localization, lang) ||
+    post.link.common;
+
+  linkContainerElement.addEventListener('click', () => {
+    window.open(url, '_blank').focus();
+  });
+
+  const linkTextElement = document.createElement('div');
+  const linkIconElement = document.createElement('div');
+
+  linkTextElement.innerText = 'ВІДКРИТИ ПОСИЛАННЯ';
+  linkTextElement.setAttribute('data-localization-key', 'post-link-text');
+  linkIconElement.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+  `;
+
+  linkContainerElement.append(
+    linkTextElement,
+    linkIconElement,
+  );
+
+  linkContainerElement.classList.add('post-link');
+  rootElement.appendChild(linkContainerElement);
 };
 
 /**
@@ -387,6 +496,9 @@ const createPost = (post, lang = 'uk') => {
   renderTitle(bodyOptions);
   renderDescription(bodyOptions);
   renderQuote(bodyOptions);
+  renderAudio(bodyOptions);
+  // renderOpenFull(bodyOptions);
+  renderLink(bodyOptions);
 
   rootElement.append(headerElement, mediaElement, bodyElement, dividerElement);
 
