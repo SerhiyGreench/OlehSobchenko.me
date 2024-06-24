@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,1110 +29,15 @@
     href="css/player.css"
     rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-color: #FFFFFF;
-      --main-color: #000000;
-      --input-placeholder-color: rgba(0, 0, 0, 0.5);
-      --scrollbar-thumb-color: #CCCCCC;
-      --scrollbar-thumb-color-hovered: #646464;
-      --gradient-background-color-start: rgba(255, 255, 255, 0);
-      --gradient-background-color-end: rgb(255, 255, 255);
-      --border-width: 6px;
-      --main-content-spacing: 64px;
-      --main-part-height: 100vh;
-      --main-part-background-size: 65vh;
-      --main-part-background-position-x: 75%;
-      --display-dark-theme-icon: block;
-      --display-light-theme-icon: none;
-      --display-main-play-button: block;
-      --display-audio-player: none;
-      --h1-custom-font-size: 128px;
-      --h2-custom-font-size: 96px;
-      --h3-custom-font-size: 48px;
-      --h4-custom-font-size: 40px;
-      --h5-custom-font-size: 38px;
-      --h6-custom-font-size: 36px;
-    }
-
-    .dark-theme {
-      --bg-color: #000000;
-      --main-color: #FFFFFF;
-      --input-placeholder-color: rgba(255, 255, 255, 0.5);
-      --gradient-background-color-start: rgba(0, 0, 0, 0);
-      --gradient-background-color-end: rgba(0, 0, 0, 1);
-      --scrollbar-thumb-color: #646464;
-      --scrollbar-thumb-color-hovered: #CCCCCC;
-      --display-dark-theme-icon: none;
-      --display-light-theme-icon: block;
-    }
-
-    .playing-state {
-      --display-main-play-button: none;
-      --display-audio-player: block;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      font-family: "Roboto Condensed", Roboto, serif;
-      margin: 0;
-      color: var(--main-color);
-      font-weight: 700;
-      fill: var(--main-color);
-      overflow-x: hidden;
-    }
-
-    p {
-      font-size: 26px;
-      margin: 0 0 26px;
-    }
-
-    h2 {
-      font-size: 36px;
-      font-weight: 800;
-      margin-bottom: 18px;
-    }
-
-    button {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    ::-webkit-scrollbar {
-      width: 14px;
-      background-color: transparent;
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color: transparent;
-      margin: 4px;
-      border-right: solid 4px var(--bg-color);
-      border-left: solid 4px var(--bg-color);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--scrollbar-thumb-color);
-      border-radius: 6px;
-      border-left: solid 4px var(--bg-color);
-      border-right: solid 4px var(--bg-color);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--scrollbar-thumb-color-hovered);
-    }
-
-    .simple-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background-color: var(--bg-color);
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-
-    .simple-modal-close-button {
-      cursor: pointer;
-    }
-
-    .simple-modal.open {
-      display: block;
-    }
-
-    .simple-modal-body {
-      background: var(--bg-color);
-    }
-
-    body.simple-modal-open {
-      overflow: hidden;
-    }
-
-    .simple-modal-header {
-      padding: var(--main-content-spacing) calc(2 * var(--main-content-spacing)) 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .simple-modal-title {
-      font-size: var(--h3-custom-font-size);
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-right: 30px;
-    }
-
-    .simple-modal-content {
-      padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
-      margin: var(--main-content-spacing) 0 72px;
-      overflow-y: scroll;
-      height: calc(100vh - 3 * var(--main-content-spacing) - 57px);
-    }
-
-    body.simple-modal-open {
-      overflow: hidden;
-    }
-
-    .simple-modal-header {
-      padding: var(--main-content-spacing) calc(2 * var(--main-content-spacing)) 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .simple-modal-title {
-      font-size: var(--h3-custom-font-size);
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-right: 30px;
-    }
-
-    .simple-modal-content {
-      padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
-      margin: var(--main-content-spacing) 0 72px;
-      overflow-y: scroll;
-      height: calc(100vh - 3 * var(--main-content-spacing) - 57px);
-    }
-
-    #main-part {
-      height: var(--main-part-height);
-      width: 100%;
-      background-image: linear-gradient(to bottom, var(--gradient-background-color-start) 80%, var(--gradient-background-color-end)), url("img/main-photo.svg");
-      background-repeat: no-repeat;
-      background-position-x: var(--main-part-background-position-x);
-      background-position-y: calc(100% + 2px);
-      background-size: var(--main-part-background-size);
-    }
-
-    #person-description-container {
-      max-width: 590px;
-      padding-left: var(--main-content-spacing);
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-
-    #main-part-content {
-      position: relative;
-      padding: var(--main-content-spacing) var(--main-content-spacing) 0;
-      height: calc(100% - var(--main-content-spacing));
-    }
-
-    #main-wrapper {
-      position: relative;
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-
-    #main-play-button {
-      position: fixed;
-      bottom: var(--main-content-spacing);
-      right: var(--main-content-spacing);
-      cursor: pointer;
-      display: var(--display-main-play-button);
-    }
-
-    #scroll-down-button-container {
-      position: absolute;
-      bottom: 40px;
-      right: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #scroll-down-button-container svg {
-      transform: rotate(90deg);
-    }
-
-    #language-item-uk > svg,
-    #language-item-en > svg {
-      display: none;
-    }
-
-    #main-quote-mobile {
-      display: none;
-    }
-
-    .mobile {
-      display: none;
-    }
-
-    .desktop {
-      display: block;
-    }
-
-    .selected > svg {
-      display: block !important;
-    }
-
-    .main-title {
-      font-size: var(--h1-custom-font-size);
-    }
-
-    .life-dates {
-      font-size: var(--h3-custom-font-size);
-      margin: 0 0.005vw 0 0;
-    }
-
-    .name-life-dates-box {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
-    .person-name {
-      line-height: var(--h2-custom-font-size);
-    }
-
-    .button-outlined {
-      border: var(--border-width) solid var(--main-color);
-      background: transparent;
-      color: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      padding: 2px 5px;
-    }
-
-    .button-end-icon {
-      display: flex;
-      align-items: center;
-    }
-
-    .biography-button {
-      font-size: 40px;
-      margin: 20px 0;
-      padding-top: 2px;
-    }
-
-    .button-text {
-      padding: 0 10px;
-    }
-
-    .main-quote-container {
-      border-left: 4px solid var(--main-color);
-      padding: 8px 0 9px 16px;
-      margin-left: 6px;
-      font-size: 38px;
-      text-shadow: 1px 1px 2px var(--bg-color);
-    }
-
-    .main-quote {
-      display: flex;
-      margin: 80px 0 124px;
-    }
-
-    .main-quote-mobile {
-      display: flex;
-      margin: 20px 0 48px;
-    }
-
-    .main-action-bar-container {
-      position: absolute;
-      top: var(--main-content-spacing);
-      right: var(--main-content-spacing);
-    }
-
-    .main-action-bar {
-      display: flex;
-      align-items: center;
-      column-gap: 16px;
-    }
-
-    .language-button {
-      font-size: 32px;
-    }
-
-    .text-button {
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      padding: 8px 8px;
-      user-select: none;
-    }
-
-    .icon-button {
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .main-play-button-mobile {
-      cursor: pointer;
-      display: none;
-      margin-top: 30px;
-    }
-
-    #scroll-down-button {
-      cursor: pointer;
-      width: 200px;
-      max-width: 100vw;
-      display: flex;
-      justify-content: center;
-    }
-
-    .dark-theme-icon {
-      display: var(--display-dark-theme-icon);
-    }
-
-    .light-theme-icon {
-      display: var(--display-light-theme-icon);
-    }
-
-    .container-title {
-      font-size: var(--h2-custom-font-size);
-    }
-
-    .secondary-container {
-      position: relative;
-      padding: var(--main-content-spacing) var(--main-content-spacing) 0;
-    }
-
-    .container-title {
-      display: flex;
-      align-items: center;
-    }
-
-    .container-title .collapse-icon {
-      transform: rotate(90deg);
-      transition: transform 0.2s ease-in;
-    }
-
-    .container-title .container-title-text {
-      margin-right: 10px;
-    }
-
-    .collapsible-container.open .collapse-icon {
-      transform: rotate(270deg);
-    }
-
-    .standard-input {
-      background-color: transparent;
-      border: none;
-      border-bottom: 4px solid var(--main-color);
-      padding: 10px 12px;
-      height: 32px;
-      font-weight: 700;
-      font-family: "Roboto Condensed", Roboto, serif;
-      font-size: 32px;
-      color: var(--main-color);
-    }
-
-    .standard-input::placeholder {
-      font-weight: 700;
-      font-family: "Roboto Condensed", Roboto, serif;
-      font-size: 32px;
-      color: var(--input-placeholder-color);
-    }
-
-    .standard-input:focus {
-      outline: none;
-    }
-
-    .selector-language-item {
-      cursor: pointer;
-      display: flex;
-      align-items: flex-end;
-      font-size: 26px;
-      padding-bottom: 20px;
-      margin-right: 20px;
-    }
-
-    .selector-language-item > .selector-language-name {
-      margin-right: 20px;
-    }
-
-    .selector-language-item > svg {
-      padding-bottom: 2px;
-    }
-
-    .full-name-life-dates {
-      max-width: min-content;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      background: var(--bg-color);
-      cursor: pointer;
-      border-radius: 50%;
-      border: 4px solid var(--main-color);
-      margin: 0;
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
-      background: var(--bg-color);
-      cursor: pointer;
-      border-radius: 50%;
-      border: 4px solid var(--main-color);
-      margin: 0;
-    }
-
-    input[type="range"]::-ms-thumb {
-      width: 24px;
-      height: 24px;
-      background: var(--bg-color);
-      cursor: pointer;
-      border-radius: 50%;
-      border: 4px solid var(--main-color);
-      margin: 0;
-    }
-
-    @media (max-width: 1535px) {
-      .main-title {
-        font-size: clamp(72px, 6.5vw, var(--h1-custom-font-size));
-      }
-
-      .life-dates {
-        font-size: clamp(32px, 3vw, var(--h3-custom-font-size));
-      }
-
-      .person-name {
-        line-height: clamp(54px, 5vw, var(--h2-custom-font-size));
-      }
-    }
-
-    @media (max-width: 950px) {
-      :root {
-        --border-width: 4px;
-        --main-content-spacing: 30px;
-        --main-part-background-size: 50vh;
-        --main-part-background-position-x: 50%;
-        --h1-custom-font-size: 56px;
-        --h2-custom-font-size: 26px;
-      }
-
-      #main-play-button {
-        display: none;
-      }
-
-      #scroll-down-button {
-        display: flex;
-        align-items: center;
-        width: 100vw;
-        height: 100%;
-      }
-
-      #scroll-down-button-container {
-        bottom: 0;
-        height: 96px;
-      }
-
-      #main-quote-desktop {
-        display: none;
-      }
-
-      #main-quote-mobile {
-        display: block;
-      }
-
-      .main-quote-container {
-        font-size: 28px;
-      }
-
-      .main-action-bar-container {
-        top: calc(var(--main-content-spacing) - 5px);
-        right: calc(var(--main-content-spacing) - 10px);
-      }
-
-      .mobile {
-        display: block;
-      }
-
-      .desktop {
-        display: none;
-      }
-
-      .language-button {
-        display: none;
-      }
-
-      .language-button-mobile {
-        display: block;
-      }
-
-      .main-action-bar {
-        flex-direction: column-reverse;
-        row-gap: 4px;
-      }
-
-      #person-description-container {
-        align-items: flex-start;
-        padding-left: 0;
-      }
-
-      .main-title {
-        font-size: var(--h1-custom-font-size);
-      }
-
-      .icon-button {
-        padding: 0;
-      }
-
-      .search-button {
-        display: flex;
-        align-items: center;
-        height: 32px;
-      }
-
-      .collapse-icon {
-        width: 48px;
-        height: 48px;
-      }
-
-      .life-dates {
-        font-size: var(--h2-custom-font-size);
-        margin: 0 2px 0 0;
-      }
-
-      .person-name {
-        line-height: 42px;
-      }
-
-      .biography-button {
-        font-size: 26px;
-      }
-
-      .icon-button > svg {
-        transform: scale(0.8);
-      }
-
-      .main-play-button-mobile {
-        display: block;
-      }
-
-      .container-title {
-        font-size: var(--h1-custom-font-size);
-      }
-
-      .simple-modal-title {
-        font-size: 36px;
-      }
-
-      p {
-        font-size: 18px;
-        margin: 0 0 18px;
-      }
-
-      h2 {
-        font-size: 24px;
-        margin-bottom: 18px;
-      }
-
-      .simple-modal-content {
-        padding: 0 calc(var(--main-content-spacing)) var(--main-content-spacing);
-      }
-
-      .simple-modal-header {
-        padding: var(--main-content-spacing) calc(var(--main-content-spacing)) 0;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .main-title {
-        font-size: clamp(16px, 12vw, var(--h1-custom-font-size));
-        line-height: clamp(16px, 10vw, var(--h1-custom-font-size));
-      }
-
-      .life-dates {
-        font-size: clamp(8px, 5vw, var(--h2-custom-font-size));
-      }
-
-      .biography-button {
-        width: 40vw;
-        font-size: clamp(8px, 6.84vw, var(--h2-custom-font-size));
-        padding: 0;
-        justify-content: center;
-      }
-
-      .biography-button > svg {
-        display: none;
-      }
-
-      .button-end-icon {
-        display: none !important;
-      }
-
-      .icon-button > svg {
-        transform: scale(0.6);
-      }
-    }
-
-    @media (min-height: 1080px) {
-      :root {
-        --main-part-height: 1080px;
-        --main-part-background-size: 720px;
-      }
-    }
-  </style>
-
-  <script>
-    const localStorageThemeKey = 'website_theme';
-    const savedTheme = localStorage.getItem(localStorageThemeKey);
-
-    if (savedTheme === 'dark') {
-      const style = document.createElement('style');
-
-      style.setAttribute('data-remove-on-load', true);
-
-      style.appendChild(document.createTextNode(`
-         :root {
-          --bg-color: #000000;
-          --main-color: #FFFFFF;
-
-          --input-placeholder-color: rgba(255, 255, 255, 0.5);
-
-          --gradient-background-color-start: rgba(0, 0, 0, 0);
-          --gradient-background-color-end: rgba(0, 0, 0, 1);
-
-          --scrollbar-thumb-color: #646464;
-          --scrollbar-thumb-color-hovered: #CCCCCC;
-
-          --display-dark-theme-icon: none;
-          --display-light-theme-icon: block;
-        }
-      `));
-
-      document.head.appendChild(style);
-    }
-
-    const saveThemePreference = () => {
-      if (document.body.classList.contains('dark-theme')) {
-        localStorage.setItem('website_theme', 'dark');
-      } else {
-        localStorage.setItem('website_theme', 'kight');
-      }
-    }
-
-    window.addEventListener('load', () => {
-      document.querySelectorAll(
-        '[data-remove-on-load=true]',
-      ).forEach(e => {
-        e.remove();
-      });
-
-      const savedTheme = localStorage.getItem(localStorageThemeKey);
-
-      if (!savedTheme) {
-        saveThemePreference();
-
-        return;
-      }
-
-      if (savedTheme === 'dark') {
-        document.body.classList.toggle('dark-theme')
-      }
-    });
-
-    const handleSwitchThemes = () => {
-      document.body.classList.toggle('dark-theme');
-
-      saveThemePreference();
-    };
-
-    const localization = {
-      uk: {
-        "person-full-name": "Олег Собченко",
-        "person-name": "ОЛЕГ",
-        "person-last-name": "СОБЧЕНКО",
-        "biography-title": "БІОГРАФІЯ",
-        "person-main-quote": "ХОЧУ ЩОБ ВСІ БУЛИ ЗЛІ, ВЕСЕЛІ І ДОБРЕ ПОЧУВАЛИСЯ",
-        "categories-title": "КАТЕГОРІЇ",
-        "tags-title": "ТЕГИ",
-        "life-title": "ЖИТТЄПИС",
-        "search-input-placeholder": "Пошук...",
-        "language-title": "МОВА",
-        "search-results-title": "Результати",
-        "biography-article": `
-          <p>Олег Андрійович Собченко (нар. 4 грудня 1973, Корсунь-Шевченківський — пом. 24 січня 2023) — український громадський діяч, військовик. Активіст Євромайдану. Учасник російсько-української війни з 2014, герой оборони Києва у березні 2022, що згідно деяких оцінок був одним з тих, хто врятував Київ від захоплення росіянами.</p>
-
-          <h2>Життєпис до 2022</h2>
-          <p>Народився 4 грудня 1973 у Корсунь-Шевченківському Черкаської області, закінчив там школу і надалі проживав. Був підприємцем.
-
-          <p>Олег Собченко був активним членом фонду Героїка, що боровся за увічнення памяті про борців за державність України. Як тесляр і каменяр Олег Собченко впродовж багатьох років безкорисливо працював над відновленням памятників. Згідно спогадів речника Генштабу ЗСУ Андрія Ковальова саме Собченко реалізовував всі масштабні проєкти "Героїки" своїми руками.</p>
-
-          <p>Олег Собченко був учасником багатьох патріотичних вуличних акцій, зокрема Мовного Майдану.</p>
-
-          <p>З початком Революції Гідності став її активістом, був сотником Самооборони Майдану. Під час протистояння з Беркутом у Черкасах отримав чисельні забої. 20 лютого 2019 за заслуги під час Революції Гідності Олег Собченко отримав Орден «За мужність» III ступеня.</p>
-
-          <p>З початком 2014 Російсько-української війни воював до 2016 у складі одного з підрозділів батальйону Азов який з жовтня 2014 став полком «Азов».</p>
-
-          <p>Після повернення після служби в Азові до Корсуня-Шевченківського боровся щоб врятувати річку Рось від забруднення і обміління.</p>
-
-          <h2>Участь у війні з Росією у 2022-23 роках</h2>
-          <p>З початком повномасштабного вторгнення у лютому 2022 долучився до 72 омбр ім. Чорних Запорожців оператором-аеророзвідником. На початку березня 2022 року брав участь в битві за Київ: боях у районі Лютіж — Демидів — Козаровичі, в тому числі — за греблю в Козаровичах та за село Мощун.</p>
-
-          <p>3 травня 2022 року за особисту мужність і самовіддані дії, виявлені у захисті державного суверенітету та територіальної цілісності України, вірність військовій присязі Олег Собченко отримав Орден «За мужність» II ступеня.</p>
-
-          <p>Загинув 24 січня 2023 року від отриманих поранень у результаті російського артилерійського обстрілу в м. Вугледар на Донеччині. Похований у м. Корсунь-Шевченківський на Черкащині.</p>
-
-          <h2>Вшанування пам'яті</h2>
-          <p>У місті Корсунь-Шевченківський перейменували вулицю 4-ту Гвардійську іменем Олега Собченка.</p>
-
-          <h2>Нагороди</h2>
-          <p>
-          Орден «За мужність» I ступеня (16 серпня 2023, посмертно) — за особисту мужність, виявлену у захисті державного суверенітету та територіальної цілісності України, самовіддане виконання військового обов’язку
-          Орден «За мужність» II ступеня (3 травня 2022) — за особисту мужність і самовіддані дії, виявлені у захисті державного суверенітету та територіальної цілісності України, вірність військовій присязі
-          Орден «За мужність» IIІ ступеня (20 лютого 2019) — за громадянську мужність, самовіддане відстоювання конституційних засад демократії, прав і свобод людини, виявлені під час Революції Гідності, плідну громадську та волонтерську діяльність
-          Нагрудний знак «Учасник АТО»
-          Медаль «За жертовність і любов до України» Української православної церкви Київського патріархату.
-          </p>
-        `,
-
-        "language": "ENG",
-      },
-      en: {
-        "person-full-name": "Oleh Sobchenko",
-        "person-name": "OLEH",
-        "person-last-name": "SOBCHENKO",
-        "biography-title": "BIOGRAPHY",
-        "person-main-quote": "I WANT EVERYONE TO BE ANGRY, CHEERFUL, AND FEEL GOOD",
-        "categories-title": "CATEGORIES",
-        "tags-title": "TAGS",
-        "life-title": "STORY OF LIFE",
-        "search-input-placeholder": "Search...",
-        "language-title": "LANGUAGE",
-        "search-results-title": "Results",
-        "biography-article": `
-          <p>Oleh Andriyovych Sobchenko (born December 4, 1973, Korsun-Shevchenkivskyi – died January 24, 2023) was a Ukrainian public figure and military serviceman. He was an activist of the Euromaidan and a participant in the Russo-Ukrainian War since 2014. He was a hero of the defense of Kyiv in March 2022 and, according to some estimates, was one of those who saved Kyiv from being captured by the Russians.</p>
-
-          <h2>Biography until 2022</h2>
-          <p>Oleh Sobchenko was born on December 4, 1973, in Korsun-Shevchenkivskyi, Cherkasy region, where he finished school and continued to live. He was an entrepreneur.</p>
-
-          <p>Oleh Sobchenko was an active member of the Heroika Foundation, which fought to commemorate the memory of those who fought for Ukrainian statehood. As a carpenter and stonemason, Sobchenko worked selflessly for many years on restoring monuments. According to the recollections of the spokesperson for the General Staff of the Armed Forces of Ukraine, Andriy Kovalov, Sobchenko implemented all of Heroika's large-scale projects with his own hands.</p>
-
-          <p>Oleh Sobchenko participated in many patriotic street actions, including the Language Maidan.</p>
-
-          <p>With the start of the Revolution of Dignity, he became an activist and was a centurion of the Maidan Self-Defense. During clashes with the Berkut in Cherkasy, he sustained numerous bruises. On February 20, 2019, for his merits during the Revolution of Dignity, Oleh Sobchenko was awarded the Order "For Courage" III degree.</p>
-
-          <p>With the onset of the Russo-Ukrainian War in 2014, he fought until 2016 as part of one of the Azov battalion units, which became the Azov regiment in October 2014.</p>
-
-          <p>After returning from service in Azov to Korsun-Shevchenkivskyi, he fought to save the Ros River from pollution and shallowing.</p>
-
-          <h2>Participation in the war with Russia in 2022-23</h2>
-          <p>With the start of the full-scale invasion in February 2022, he joined the 72nd Mechanized Brigade named after the Black Zaporozhians as a drone operator. In early March 2022, he participated in the Battle of Kyiv, fighting in the area of Lytizh – Demydiv – Kozarovychi, including the battle for the Kozarovychi dam and the village of Moschun.</p>
-
-          <p>On May 3, 2022, for personal courage and selfless actions shown in the defense of the state sovereignty and territorial integrity of Ukraine, and loyalty to the military oath, Oleh Sobchenko was awarded the Order "For Courage" II degree.</p>
-
-          <p>He died on January 24, 2023, from wounds sustained as a result of Russian artillery shelling in Vuhledar, Donetsk region. He was buried in Korsun-Shevchenkivskyi, Cherkasy region.</p>
-
-          <h2>Commemoration</h2>
-          <p>In Korsun-Shevchenkivskyi, the 4th Guards Street was renamed in honor of Oleh Sobchenko.</p>
-
-          <h2>Awards</h2>
-          <p>
-          Order "For Courage" I degree (August 16, 2023, posthumously) — for personal courage shown in the defense of state sovereignty and territorial integrity of Ukraine, and selfless performance of military duty<br>
-          Order "For Courage" II degree (May 3, 2022) — for personal courage and selfless actions shown in the defense of state sovereignty and territorial integrity of Ukraine, and loyalty to the military oath<br>
-          Order "For Courage" III degree (February 20, 2019) — for civil courage, selfless defense of constitutional principles of democracy, human rights and freedoms shown during the Revolution of Dignity, and fruitful public and volunteer activities<br>
-          Badge "Participant of the ATO"<br>
-          Medal "For Sacrifice and Love for Ukraine" of the Ukrainian Orthodox Church of the Kyiv Patriarchate
-          </p>
-        `,
-
-        "language": "УКР",
-      },
-    };
-
-    const handleLanguageSelect = (lang) => {
-      const id = 'language-item-' + lang;
-      const element = document.getElementById(id);
-
-      if (!element.classList.contains('selected')) {
-        handleLocalize();
-      }
-    };
-
-    const handleLocalize = () => {
-      const switcher = document.getElementById('language-switcher');
-
-      if (!switcher) {
-        return;
-      }
-
-      const translateTo = String(
-        switcher.getAttribute('data-translate-to'),
-      );
-      const translateFrom = String(
-        switcher.getAttribute('data-translate-from'),
-      );
-      const elements = document.querySelectorAll('[data-localization-key]');
-
-      elements.forEach(e => {
-        const key = e.getAttribute('data-localization-key');
-        const value = localization[translateTo][key];
-
-        if (e.tagName === 'INPUT') {
-          e.placeholder = value;
-
-          return;
-        }
-
-        if (e.className.includes('rich-article')) {
-          const newArticle = document.createElement('span');
-
-          newArticle.innerHTML = value;
-
-          e.replaceChildren(newArticle);
-
-          return;
-        }
-
-        e.innerText = value;
-      });
-
-      switcher.setAttribute('data-translate-to', translateFrom);
-      switcher.setAttribute('data-translate-from', translateTo);
-
-      const idTranslateTo = 'language-item-' + translateTo;
-      const idTranslateFrom = 'language-item-' + translateFrom;
-
-      const translateToItem = document.getElementById(idTranslateTo);
-      const translateFromItem = document.getElementById(idTranslateFrom);
-
-      if (translateToItem) {
-        translateToItem.classList.add('selected');
-      }
-
-      if (translateFromItem) {
-        translateFromItem.classList.remove('selected');
-      }
-    };
-
-    const handleScrollDownScreenHeight = () => {
-      const clientHeight = document.documentElement.clientHeight;
-      const scrollTop = document.documentElement.scrollTop;
-
-      window.scrollBy({
-        top: scrollTop < clientHeight
-          ? clientHeight - scrollTop
-          : 0
-        ,
-        left: 0,
-        behavior: 'smooth',
-      });
-    };
-
-    const openModal = id => {
-      const modal = document.getElementById(id);
-
-      modal.classList.add('open');
-      document.body.classList.add('simple-modal-open');
-
-      modal.querySelectorAll('[autofocus]').forEach(e => {
-        e.focus();
-      });
-    };
-
-    const closeModal = () => {
-      document.querySelector('.simple-modal.open').classList.remove('open');
-      document.body.classList.remove('simple-modal-open');
-    };
-
-    window.addEventListener('load', function () {
-      document.addEventListener('click', event => {
-        if (event.target.classList.contains('simple-modal')) {
-          closeModal();
-        }
-      });
-
-      document.querySelectorAll('.collapsible-container').forEach(element => {
-        for (const title of element.getElementsByClassName('container-title')) {
-          title.addEventListener(
-            'click',
-            () => handleCollapsibleContainer(element.id),
-          );
-        }
-      });
-    });
-
-    const handleCollapsibleContainer = (id) => {
-      const modal = document.getElementById(id);
-
-      if (modal.classList.contains('open')) {
-        modal.classList.remove('open');
-
-        return;
-      }
-
-      modal.classList.add('open');
-    };
-
-    const handlePlay = () => {
-      document.body.classList.toggle('playing-state');
-    };
-  </script>
+  <link
+    href="css/style.css"
+    rel="stylesheet">
+
+  <script src="js/main.js"></script>
+  <script src="player.js"></script>
 </head>
-
 <body>
-
 <div id="root">
-  <div id="search-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title">
-          <div class="search-input-wrapper">
-            <input autofocus class="standard-input search-input" type="text"
-                   placeholder="Пошук..."
-                   data-localization-key="search-input-placeholder"/>
-          </div>
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
-            <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="simple-modal-content"
-           data-localization-key="search-results-title">
-        Результати
-      </div>
-    </div>
-  </div>
-
-  <div id="biography-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title"
-             data-localization-key="biography-title">
-          БІОГРАФІЯ
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
-            <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="simple-modal-content">
-        <div class="rich-article" data-localization-key="biography-article">
-          <p>Олег Андрійович Собченко (нар. 4 грудня 1973,
-            Корсунь-Шевченківський — пом. 24 січня 2023) — український
-            громадський діяч, військовик. Активіст Євромайдану. Учасник
-            російсько-української війни з 2014, герой оборони Києва у березні
-            2022, що згідно деяких оцінок був одним з тих, хто врятував Київ
-            від захоплення росіянами.</p>
-
-          <h2>Життєпис до 2022</h2>
-          <p>Народився 4 грудня 1973 у Корсунь-Шевченківському Черкаської
-            області, закінчив там школу і надалі проживав. Був підприємцем.
-
-          <p>Олег Собченко був активним членом фонду Героїка, що боровся за
-            увічнення памяті про борців за державність України. Як тесляр і
-            каменяр Олег Собченко впродовж багатьох років безкорисливо
-            працював над відновленням памятників. Згідно спогадів речника
-            Генштабу ЗСУ Андрія Ковальова саме Собченко реалізовував всі
-            масштабні проєкти "Героїки" своїми руками.</p>
-
-          <p>Олег Собченко був учасником багатьох патріотичних вуличних акцій,
-            зокрема Мовного Майдану.</p>
-
-          <p>З початком Революції Гідності став її активістом, був сотником
-            Самооборони Майдану. Під час протистояння з Беркутом у Черкасах
-            отримав чисельні забої. 20 лютого 2019 за заслуги під час
-            Революції Гідності Олег Собченко отримав Орден «За мужність» III
-            ступеня.</p>
-
-          <p>З початком 2014 Російсько-української війни воював до 2016 у
-            складі одного з підрозділів батальйону Азов який з жовтня 2014
-            став полком «Азов».</p>
-
-          <p>Після повернення після служби в Азові до Корсуня-Шевченківського
-            боровся щоб врятувати річку Рось від забруднення і обміління.</p>
-
-          <h2>Участь у війні з Росією у 2022-23 роках</h2>
-          <p>З початком повномасштабного вторгнення у лютому 2022 долучився до
-            72 омбр ім. Чорних Запорожців оператором-аеророзвідником. На
-            початку березня 2022 року брав участь в битві за Київ: боях у
-            районі Лютіж — Демидів — Козаровичі, в тому числі — за греблю в
-            Козаровичах та за село Мощун.</p>
-
-          <p>3 травня 2022 року за особисту мужність і самовіддані дії,
-            виявлені у захисті державного суверенітету та територіальної
-            цілісності України, вірність військовій присязі Олег Собченко
-            отримав Орден «За мужність» II ступеня.</p>
-
-          <p>Загинув 24 січня 2023 року від отриманих поранень у результаті
-            російського артилерійського обстрілу в м. Вугледар на Донеччині.
-            Похований у м. Корсунь-Шевченківський на Черкащині.</p>
-
-          <h2>Вшанування пам'яті</h2>
-          <p>У місті Корсунь-Шевченківський перейменували вулицю 4-ту
-            Гвардійську іменем Олега Собченка.</p>
-
-          <h2>Нагороди</h2>
-          <p>
-            Орден «За мужність» I ступеня (16 серпня 2023, посмертно) — за
-            особисту мужність, виявлену у захисті державного суверенітету та
-            територіальної цілісності України, самовіддане виконання
-            військового обов’язку<br/>
-            Орден «За мужність» II ступеня (3 травня 2022) — за особисту
-            мужність і самовіддані дії, виявлені у захисті державного
-            суверенітету та територіальної цілісності України, вірність
-            військовій присязі<br/>
-            Орден «За мужність» IIІ ступеня (20 лютого 2019) — за громадянську
-            мужність, самовіддане відстоювання конституційних засад
-            демократії, прав і свобод людини, виявлені під час Революції
-            Гідності, плідну громадську та волонтерську діяльність<br/>
-            Нагрудний знак «Учасник АТО»<br/>
-            Медаль «За жертовність і любов до України» Української
-            православної церкви Київського патріархату.<br/>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="select-language-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title" data-localization-key="language-title">
-          МОВА
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
-            <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="simple-modal-content">
-        <div class="full-language-selector">
-          <div id="language-item-uk" class="selector-language-item selected"
-               data-language-item="uk" onclick="handleLanguageSelect('uk')">
-            <div class="selector-language-name">Українська</div>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                 viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-              <path
-                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
-            </svg>
-          </div>
-          <div id="language-item-en" class="selector-language-item"
-               data-language-item="en" onclick="handleLanguageSelect('en')">
-            <div class="selector-language-name">English</div>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                 viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-              <path
-                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="main-wrapper">
     <div id="main-part">
       <div id="main-part-content">
@@ -1300,8 +204,12 @@
       </div>
 
     </div>
-    <div id="life-container" class="secondary-container">
-      <div class="container-title" data-localization-key="life-title">ЖИТТЄПИС
+    <div id="life-story-container">
+      <div class="container-title life-story-title" data-localization-key="life-title">ЖИТТЄПИС
+      </div>
+
+      <div id="posts-container">
+
       </div>
     </div>
     <div id="main-play-button" onclick="handlePlay()">
@@ -1367,11 +275,161 @@
     </div>
   </div>
 
+  <div id="search-modal" class="simple-modal">
+    <div class="simple-modal-body">
+      <div class="simple-modal-header search-modal-header">
+        <div class="simple-modal-title">
+          <div class="search-input-wrapper">
+            <input autofocus class="standard-input search-input" type="text"
+                   placeholder="Пошук..."
+                   data-localization-key="search-input-placeholder"/>
+          </div>
+        </div>
+        <div class="simple-modal-close-button" onclick="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+               viewBox="0 -960 960 960" width="48px">
+            <path
+              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="simple-modal-content"
+           data-localization-key="search-results-title">
+        Результати
+      </div>
+    </div>
+  </div>
+  <div id="biography-modal" class="simple-modal">
+    <div class="simple-modal-body">
+      <div class="simple-modal-header search-modal-header">
+        <div class="simple-modal-title"
+             data-localization-key="biography-title">
+          БІОГРАФІЯ
+        </div>
+        <div class="simple-modal-close-button" onclick="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+               viewBox="0 -960 960 960" width="48px">
+            <path
+              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="simple-modal-content">
+        <div class="rich-article" data-localization-key="biography-article">
+          <p>Олег Андрійович Собченко (нар. 4 грудня 1973,
+            Корсунь-Шевченківський — пом. 24 січня 2023) — український
+            громадський діяч, військовик. Активіст Євромайдану. Учасник
+            російсько-української війни з 2014, герой оборони Києва у березні
+            2022, що згідно деяких оцінок був одним з тих, хто врятував Київ
+            від захоплення росіянами.</p>
 
-  <script src="player.js"></script>
+          <h2>Життєпис до 2022</h2>
+          <p>Народився 4 грудня 1973 у Корсунь-Шевченківському Черкаської
+            області, закінчив там школу і надалі проживав. Був підприємцем.
 
+          <p>Олег Собченко був активним членом фонду Героїка, що боровся за
+            увічнення памяті про борців за державність України. Як тесляр і
+            каменяр Олег Собченко впродовж багатьох років безкорисливо
+            працював над відновленням памятників. Згідно спогадів речника
+            Генштабу ЗСУ Андрія Ковальова саме Собченко реалізовував всі
+            масштабні проєкти "Героїки" своїми руками.</p>
+
+          <p>Олег Собченко був учасником багатьох патріотичних вуличних акцій,
+            зокрема Мовного Майдану.</p>
+
+          <p>З початком Революції Гідності став її активістом, був сотником
+            Самооборони Майдану. Під час протистояння з Беркутом у Черкасах
+            отримав чисельні забої. 20 лютого 2019 за заслуги під час
+            Революції Гідності Олег Собченко отримав Орден «За мужність» III
+            ступеня.</p>
+
+          <p>З початком 2014 Російсько-української війни воював до 2016 у
+            складі одного з підрозділів батальйону Азов який з жовтня 2014
+            став полком «Азов».</p>
+
+          <p>Після повернення після служби в Азові до Корсуня-Шевченківського
+            боровся щоб врятувати річку Рось від забруднення і обміління.</p>
+
+          <h2>Участь у війні з Росією у 2022-23 роках</h2>
+          <p>З початком повномасштабного вторгнення у лютому 2022 долучився до
+            72 омбр ім. Чорних Запорожців оператором-аеророзвідником. На
+            початку березня 2022 року брав участь в битві за Київ: боях у
+            районі Лютіж — Демидів — Козаровичі, в тому числі — за греблю в
+            Козаровичах та за село Мощун.</p>
+
+          <p>3 травня 2022 року за особисту мужність і самовіддані дії,
+            виявлені у захисті державного суверенітету та територіальної
+            цілісності України, вірність військовій присязі Олег Собченко
+            отримав Орден «За мужність» II ступеня.</p>
+
+          <p>Загинув 24 січня 2023 року від отриманих поранень у результаті
+            російського артилерійського обстрілу в м. Вугледар на Донеччині.
+            Похований у м. Корсунь-Шевченківський на Черкащині.</p>
+
+          <h2>Вшанування пам'яті</h2>
+          <p>У місті Корсунь-Шевченківський перейменували вулицю 4-ту
+            Гвардійську іменем Олега Собченка.</p>
+
+          <h2>Нагороди</h2>
+          <p>
+            Орден «За мужність» I ступеня (16 серпня 2023, посмертно) — за
+            особисту мужність, виявлену у захисті державного суверенітету та
+            територіальної цілісності України, самовіддане виконання
+            військового обов’язку<br/>
+            Орден «За мужність» II ступеня (3 травня 2022) — за особисту
+            мужність і самовіддані дії, виявлені у захисті державного
+            суверенітету та територіальної цілісності України, вірність
+            військовій присязі<br/>
+            Орден «За мужність» IIІ ступеня (20 лютого 2019) — за громадянську
+            мужність, самовіддане відстоювання конституційних засад
+            демократії, прав і свобод людини, виявлені під час Революції
+            Гідності, плідну громадську та волонтерську діяльність<br/>
+            Нагрудний знак «Учасник АТО»<br/>
+            Медаль «За жертовність і любов до України» Української
+            православної церкви Київського патріархату.<br/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="select-language-modal" class="simple-modal">
+    <div class="simple-modal-body">
+      <div class="simple-modal-header search-modal-header">
+        <div class="simple-modal-title" data-localization-key="language-title">
+          МОВА
+        </div>
+        <div class="simple-modal-close-button" onclick="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+               viewBox="0 -960 960 960" width="48px">
+            <path
+              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="simple-modal-content">
+        <div class="full-language-selector">
+          <div id="language-item-uk" class="selector-language-item selected"
+               data-language-item="uk" onclick="handleLanguageSelect('uk')">
+            <div class="selector-language-name">Українська</div>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                 viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+              <path
+                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
+            </svg>
+          </div>
+          <div id="language-item-en" class="selector-language-item"
+               data-language-item="en" onclick="handleLanguageSelect('en')">
+            <div class="selector-language-name">English</div>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                 viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+              <path
+                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
 </body>
-
 </html>

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ros",
+    "name": {
+      "uk": "Рось",
+      "en": "Ros'"
+    }
+  },
+  {
+    "id": "war",
+    "name": {
+      "uk": "Війна",
+      "en": "War"
+    }
+  },
+  {
+    "id": "language-maidan",
+    "name": {
+      "uk": "Мовний майдан",
+      "en": "Language Maidan"
+    }
+  },
+  {
+    "id": "dignity-revolution",
+    "name": {
+      "uk": "Революція Гідності",
+      "en": "Revolution of Dignity"
+    }
+  },
+  {
+    "id": "heroika",
+    "name": {
+      "uk": "Героїка",
+      "en": "Heroika"
+    }
+  },
+  {
+    "id": "other",
+    "name": {
+      "uk": "Інше",
+      "en": "Other"
+    }
+  }
+]

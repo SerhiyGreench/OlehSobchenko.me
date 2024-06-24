@@ -1,0 +1,61 @@
+{
+  "id": "",
+  "path": "",
+  "title": {
+    "uk": "",
+    "en": ""
+  },
+  "categoryId": "",
+  "typeId": "",
+  "createdAt": "",
+  "happenedAt": "",
+  "shortDescription": {
+    "uk": "",
+    "en": ""
+  },
+  "description": {
+    "uk": "",
+    "en": ""
+  },
+  "quote": {
+    "uk": "",
+    "en": ""
+  },
+  "image": {
+    "link": {
+      "common": "",
+      "localization": {
+        "uk": "",
+        "en": ""
+      }
+    },
+    "data": ""
+  },
+  "video": {
+    "link": {
+      "common": "",
+      "localization": {
+        "uk": "",
+        "en": ""
+      }
+    }
+  },
+  "link": {
+    "common": "",
+    "localization": {
+      "uk": "",
+      "en": ""
+    }
+  },
+  "audio": {
+    "name": "",
+    "description": "",
+    "link": {
+      "common": "",
+      "localization": {
+        "uk": "",
+        "en": ""
+      }
+    }
+  }
+}

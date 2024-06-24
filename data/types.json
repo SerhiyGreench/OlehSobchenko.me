@@ -1,0 +1,44 @@
+[
+  {
+    "id": "photo",
+    "name": {
+      "uk": "Фото",
+      "en": "Photo"
+    }
+  },
+  {
+    "id": "video",
+    "name": {
+      "uk": "Відео",
+      "en": "Video"
+    }
+  },
+  {
+    "id": "audio",
+    "name": {
+      "uk": "Аудіо",
+      "en": "Audio"
+    }
+  },
+  {
+    "id": "memory",
+    "name": {
+      "uk": "Спогад",
+      "en": "Memory"
+    }
+  },
+  {
+    "id": "media-mention",
+    "name": {
+      "uk": "Згадка у ЗМІ",
+      "en": "Mention in Media"
+    }
+  },
+  {
+    "id": "quote",
+    "name": {
+      "uk": "Цитата",
+      "en": "Quote"
+    }
+  }
+]

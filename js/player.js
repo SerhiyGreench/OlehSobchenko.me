@@ -1,21 +1,18 @@
 const music_list = [
   {
-    img: 'img/faded.png',
     name: 'Faded',
     singer: 'Alan Walker',
-    music: 'music/Faded.mp3',
+    audio: 'audio/Faded.mp3',
   },
   {
-    img: 'img/stay.png',
     name: 'Stay',
     singer: 'The Kid LAROI, Justin Bieber',
-    music: 'music/stay.mp3',
+    audio: 'audio/stay.mp3',
   },
   {
-    img: 'img/withoutMe.png',
     name: 'Without Me',
     singer: 'Halsey',
-    music: 'music/WithoutMe.mp3',
+    audio: 'audio/WithoutMe.mp3',
   },
 ];
 
@@ -31,7 +28,6 @@ const time_range = document.querySelector(".time-range");
 let musicIndex = 0;
 let isPlaying = false;
 
-// Buttons
 const playpause_btn = document.querySelector('.playpause-btn i');
 const next_btn = document.querySelector('.next-btn i');
 const prev_btn = document.querySelector('.prev-btn i');
@@ -39,7 +35,7 @@ const prev_btn = document.querySelector('.prev-btn i');
 loadMusic(musicIndex);
 
 function loadMusic(musicIndex) {
-  music.src = music_list[musicIndex].music;
+  music.src = music_list[musicIndex].audio;
   music_singer.textContent = music_list[musicIndex].singer;
   music_name.textContent = music_list[musicIndex].name;
   music_number.textContent =
