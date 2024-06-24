@@ -37,8 +37,13 @@
     href="css/style.css"
     rel="stylesheet">
 
+  <link
+    href="css/post.css"
+    rel="stylesheet">
+
+  <!--  <script src="js/player.js"></script>-->
+  <script src="js/posts-loader.js"></script>
   <script src="js/main.js"></script>
-  <script src="player.js"></script>
 </head>
 <body>
 <div id="root">
@@ -172,52 +177,53 @@
         </div>
       </div>
     </div>
-<!--    <div id="categories-container"-->
-<!--         class="secondary-container collapsible-container">-->
-<!--      <div class="container-title">-->
-<!--        <div class="container-title-text"-->
-<!--             data-localization-key="categories-title">КАТЕГОРІЇ-->
-<!--        </div>-->
-<!--        <div class="collapse-icon">-->
-<!--          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"-->
-<!--               width="48px" viewBox="0 -960 960 960">-->
-<!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
-<!--          </svg>-->
-<!--          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"-->
-<!--               width="72px" viewBox="0 -960 960 960">-->
-<!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
-<!--          </svg>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div id="tags-container" class="secondary-container collapsible-container">-->
-<!--      <div class="container-title">-->
-<!--        <div class="container-title-text"-->
-<!--             data-localization-key="tags-title">ТЕГИ-->
-<!--        </div>-->
-<!--        <div class="collapse-icon">-->
-<!--          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"-->
-<!--               width="48px" viewBox="0 -960 960 960">-->
-<!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
-<!--          </svg>-->
-<!--          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"-->
-<!--               width="72px" viewBox="0 -960 960 960">-->
-<!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
-<!--          </svg>-->
-<!--        </div>-->
-<!--      </div>-->
+    <div id="categories-container"
+         class="secondary-container collapsible-container">
+      <div class="container-title">
+        <div class="container-title-text"
+             data-localization-key="categories-title">КАТЕГОРІЇ
+        </div>
+        <div class="collapse-icon">
+          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"
+               width="48px" viewBox="0 -960 960 960">
+            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
+          </svg>
+          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"
+               width="72px" viewBox="0 -960 960 960">
+            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div id="tags-container" class="secondary-container collapsible-container">
+      <div class="container-title">
+        <div class="container-title-text"
+             data-localization-key="tags-title">ТЕГИ
+        </div>
+        <div class="collapse-icon">
+          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"
+               width="48px" viewBox="0 -960 960 960">
+            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
+          </svg>
+          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"
+               width="72px" viewBox="0 -960 960 960">
+            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
+          </svg>
+        </div>
+      </div>
 
-<!--    </div>-->
-<!--    <div id="life-story-container">-->
-<!--      <div class="container-title life-story-title" data-localization-key="life-title">ЖИТТЄПИС-->
-<!--      </div>-->
+    </div>
+    <div id="life-story-container">
+      <div class="container-title life-story-title" data-localization-key="life-title">ЖИТТЄПИС
+      </div>
 
-<!--      <div id="posts-container">-->
+      <div id="posts-container">
+        <div>
 
-<!--      </div>-->
-<!--    </div>-->
-    <div id="main-play-button">
-<!--         onclick="handlePlay()"-->
+        </div>
+      </div>
+    </div>
+    <div id="main-play-button" onclick="handlePlay()">
       <svg xmlns="http://www.w3.org/2000/svg" height="72px"
            viewBox="0 0 24 24"
            width="72px">
@@ -228,57 +234,57 @@
     </div>
   </div>
 
-<!--  <div class="audio-player">-->
+  <div class="audio-player">
 
-<!--    <div class="slider-container">-->
-<!--      <div class="audio-start-time">0:00</div>-->
-<!--      <input type="range" class="time-range" min="0" max="100" value="0">-->
-<!--      <div class="audio-end-time">0:00</div>-->
-<!--    </div>-->
+    <div class="slider-container">
+      <div class="audio-start-time">0:00</div>
+      <input type="range" class="time-range" min="0" max="100" value="0">
+      <div class="audio-end-time">0:00</div>
+    </div>
 
-<!--    <div class="audio-control-container">-->
-<!--      <div class="details">-->
-<!--        <div class="music-name">Audio Name</div>-->
-<!--        <div class="music-singer">Description</div>-->
-<!--      </div>-->
+    <div class="audio-control-container">
+      <div class="details">
+        <div class="music-name">Audio Name</div>
+        <div class="music-singer">Description</div>
+      </div>
 
-<!--      <div class="buttons">-->
-<!--        <div class="prev-btn btn">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" height="40px"-->
-<!--               viewBox="0 0 24 24" width="40px">-->
-<!--            <path d="M0 0h24v24H0z" fill="none"/>-->
-<!--            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>-->
-<!--          </svg>-->
-<!--        </div>-->
-<!--        <div class="playpause-btn btn">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" height="48px"-->
-<!--               viewBox="0 0 24 24" width="48px">-->
-<!--            <path d="M0 0h24v24H0z" fill="none"/>-->
-<!--            <path d="M8 5v14l11-7z"/>-->
-<!--          </svg>-->
-<!--        </div>-->
-<!--        <div class="next-btn btn">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" height="40px"-->
-<!--               viewBox="0 0 24 24" width="40px">-->
-<!--            <path d="M0 0h24v24H0z" fill="none"/>-->
-<!--            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>-->
-<!--          </svg>-->
-<!--        </div>-->
+      <div class="buttons">
+        <div class="prev-btn btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40px"
+               viewBox="0 0 24 24" width="40px">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </div>
+        <div class="playpause-btn btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+               viewBox="0 0 24 24" width="48px">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <div class="next-btn btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="40px"
+               viewBox="0 0 24 24" width="40px">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </div>
 
-<!--        <audio src="" class="music"></audio>-->
-<!--      </div>-->
-<!--    </div>-->
+        <audio src="" class="music"></audio>
+      </div>
+    </div>
 
-<!--    <div id="wave">-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--      <span class="stroke"></span>-->
-<!--    </div>-->
-<!--  </div>-->
+    <div id="wave">
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+      <span class="stroke"></span>
+    </div>
+  </div>
 
   <div id="search-modal" class="simple-modal">
     <div class="simple-modal-body">

@@ -169,11 +169,11 @@ const handleLanguageSelect = (lang) => {
   const element = document.getElementById(id);
 
   if (!element.classList.contains('selected')) {
-    handleLocalize();
+    handleLocalize().then();
   }
 };
 
-const handleLocalize = () => {
+const handleLocalize = async () => {
   const switcher = document.getElementById('language-switcher');
 
   if (!switcher) {
@@ -219,6 +219,8 @@ const handleLocalize = () => {
 
   const translateToItem = document.getElementById(idTranslateTo);
   const translateFromItem = document.getElementById(idTranslateFrom);
+
+  await renderPosts('posts-container', translateTo);
 
   if (translateToItem) {
     translateToItem.classList.add('selected');
