@@ -555,6 +555,7 @@ const renderMasonry = (items, columnsNumber = 2) => {
   const columnStyles = {
     display: 'flex',
     flexDirection: 'column',
+    width: 100 / columnsNumber + '%',
   };
   const columns = [];
 
@@ -579,13 +580,18 @@ const renderMasonry = (items, columnsNumber = 2) => {
   return masonryContainer;
 };
 
-const renderPosts = async (containerId, lang = 'uk', desktop = true) => {
+const renderPosts = async (
+  containerId,
+  lang = 'uk',
+  desktop = true,
+  columns = 3,
+) => {
   const posts = await getPosts();
   const postElements = posts.map(post => createPost(post, lang));
   const container = document.getElementById(containerId);
 
   if (desktop) {
-    const masonry = renderMasonry(postElements);
+    const masonry = renderMasonry(postElements, columns);
     const newPostsElementsContainer = document.createElement('div')
 
     newPostsElementsContainer.append(masonry);
@@ -605,6 +611,11 @@ const isDesktop = () => {
     window.applicationConstants.mobileBreakpoint;
 };
 
+const isTablet = () => {
+  return document.body.clientWidth <
+    window.applicationConstants.tabletBreakpoint;
+};
+
 const initialPostsRendering = () => {
   const lang = window.applicationState.language;
 
@@ -616,14 +627,24 @@ const initialPostsRendering = () => {
 window.addEventListener('resize', async () => {
   const lang = window.applicationState.language;
   const desktop = isDesktop();
+  const tablet = isTablet();
 
-  if (window.applicationState.isDesktop === desktop) {
+  if (
+    window.applicationState.isDesktop === desktop &&
+    window.applicationState.isTablet === tablet
+  ) {
     return ;
   }
 
-  await renderPosts('posts-container', lang, desktop);
+  await renderPosts(
+    'posts-container',
+    lang,
+    desktop,
+    tablet ? 2 : 3,
+  );
 
   window.applicationState.isDesktop = isDesktop();
+  window.applicationState.isTablet = isTablet();
 });
 
 initialPostsRendering();
