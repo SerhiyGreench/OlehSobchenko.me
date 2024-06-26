@@ -39,12 +39,20 @@
 }
 
 .post-video {
-  width: 100%;
   padding: 15px 0;
 
-  iframe {
-    width: 100%;
-    height: 52vw;
+  .post-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -96,4 +104,10 @@
   font-size: 18px;
   padding: 10px 0 0;
   cursor: pointer;
+}
+
+@media (min-width: 951px) {
+  .post-media {
+    margin: 0 var(--main-content-spacing) 0;
+  }
 }

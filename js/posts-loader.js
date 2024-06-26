@@ -262,6 +262,7 @@ const renderVideo = (options) => {
   }
 
   const videoContainerElement = document.createElement('div');
+  const wrapperElement = document.createElement('div');
 
   if (video.link && !video.data) {
     const videoElement = document.createElement('video');
@@ -269,14 +270,16 @@ const renderVideo = (options) => {
     videoElement.src = getLocalized(video.link.localization, lang) ||
       video.link.common;
 
-    rootElement.appendChild(videoElement);
+    wrapperElement.appendChild(videoElement);
   }
 
   if (video.data) {
-    videoContainerElement.innerHTML = video.data;
+    wrapperElement.innerHTML = video.data;
   }
 
   videoContainerElement.classList.add('post-video');
+  wrapperElement.classList.add('post-video-wrapper');
+  videoContainerElement.appendChild(wrapperElement);
   rootElement.appendChild(videoContainerElement);
 };
 
@@ -505,10 +508,54 @@ const createPost = (post, lang = 'uk') => {
   return rootElement;
 };
 
+const renderMasonry = (items, columnsNumber = 2) => {
+  const masonryContainer = document.createElement('div');
+  const rowStyles = {
+    display: 'flex',
+  };
+  const columnStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+  };
+  const columns = [];
+
+  Object.assign(masonryContainer.style, rowStyles);
+
+  for (let i = 0; i < columnsNumber; i++) {
+    const column = document.createElement('div');
+
+    Object.assign(column.style, columnStyles);
+    columns.push(column);
+    masonryContainer.appendChild(column);
+  }
+
+  items.forEach((item, index) => {
+    const column = columns[index % columnsNumber];
+    const itemElement = document.createElement('div');
+
+    itemElement.appendChild(item);
+    column.appendChild(itemElement);
+  });
+
+  return masonryContainer;
+};
+
 const renderPosts = async (containerId, lang = 'uk') => {
   const posts = await getPosts();
   const postElements = posts.map(post => createPost(post, lang));
   const container = document.getElementById(containerId);
+  const width = document.body.clientWidth;
+
+  if (width > 950) {
+    const masonry = renderMasonry(postElements);
+    const newPostsElementsContainer = document.createElement('div')
+
+    newPostsElementsContainer.append(masonry);
+    container.replaceChildren(newPostsElementsContainer);
+
+    return;
+  }
+
   const newPostsElementsContainer = document.createElement('div')
 
   newPostsElementsContainer.append(...postElements);
@@ -516,9 +563,17 @@ const renderPosts = async (containerId, lang = 'uk') => {
 };
 
 const initialPostsRendering = () => {
+  const lang = window.applicationState.language;
+
   window.addEventListener('load', async () => {
-    await renderPosts('posts-container');
+    await renderPosts('posts-container', lang);
   });
 };
+
+window.addEventListener('resize', async () => {
+  const lang = window.applicationState.language;
+
+  await renderPosts('posts-container', lang);
+});
 
 initialPostsRendering();

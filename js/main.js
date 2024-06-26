@@ -188,6 +188,9 @@ const handleLocalize = async () => {
   const translateFrom = String(
     switcher.getAttribute('data-translate-from'),
   );
+
+  await renderPosts('posts-container', translateTo);
+
   const elements = document.querySelectorAll('[data-localization-key]');
 
   elements.forEach(e => {
@@ -222,7 +225,7 @@ const handleLocalize = async () => {
   const translateToItem = document.getElementById(idTranslateTo);
   const translateFromItem = document.getElementById(idTranslateFrom);
 
-  await renderPosts('posts-container', translateTo);
+  window.applicationState.language = translateTo;
 
   if (translateToItem) {
     translateToItem.classList.add('selected');
