@@ -5,6 +5,19 @@
 
 .post-header {
   margin: 0 var(--main-content-spacing) 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-header-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .post-body {
@@ -12,15 +25,16 @@
 }
 
 .post-divider {
-  margin: 20px var(--main-content-spacing) 0;
-  border-bottom: 2px solid var(--main-color);
+  margin: 30px 0 0;
+  border-bottom: 8px solid var(--main-color);
+  opacity: 0.15;
 }
 
 .post-header-title {
   display: flex;
   font-size: 18px;
   line-height: 18px;
-  padding: 5px 0;
+  padding: 5px 0 3px;
 }
 
 .post-header-title-divider {
@@ -30,7 +44,7 @@
 
 .post-date {
   font-size: 14px;
-  padding: 5px 0;
+  padding: 3px 0 5px;
 }
 
 .post-image {
@@ -109,5 +123,9 @@
 @media (min-width: 951px) {
   .post-media {
     margin: 0 var(--main-content-spacing) 0;
+  }
+
+  .post-divider {
+    margin: 30px var(--main-content-spacing) 0;
   }
 }

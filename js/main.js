@@ -75,6 +75,7 @@ const localization = {
     "language-title": "МОВА",
     "search-results-title": "Результати",
     "post-link-text": "ВІДКРИТИ ПОСИЛАННЯ",
+    "person-main-quote-main-description": "Хочу щоб всі були злі, веселі і добре почувалися",
     "biography-article": `
           <p>Олег Андрійович Собченко (нар. 4 грудня 1973, Корсунь-Шевченківський — пом. 24 січня 2023) — український громадський діяч, військовик. Активіст Євромайдану. Учасник російсько-української війни з 2014, герой оборони Києва у березні 2022, що згідно деяких оцінок був одним з тих, хто врятував Київ від захоплення росіянами.</p>
 
@@ -126,6 +127,7 @@ const localization = {
     "language-title": "LANGUAGE",
     "search-results-title": "Results",
     "post-link-text": "OPEN LINK",
+    "person-main-quote-main-description": "I want everyone to be angry, cheerful, and feel good",
     "biography-article": `
           <p>Oleh Andriyovych Sobchenko (born December 4, 1973, Korsun-Shevchenkivskyi – died January 24, 2023) was a Ukrainian public figure and military serviceman. He was an activist of the Euromaidan and a participant in the Russo-Ukrainian War since 2014. He was a hero of the defense of Kyiv in March 2022 and, according to some estimates, was one of those who saved Kyiv from being captured by the Russians.</p>
 

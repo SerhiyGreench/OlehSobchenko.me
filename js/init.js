@@ -2,4 +2,8 @@ const applicationState = {
   language: 'uk',
 };
 
-Object.assign(window, { applicationState });
+const applicationConstants = {
+  mobileBreakpoint: 950,
+};
+
+Object.assign(window, { applicationState, applicationConstants });

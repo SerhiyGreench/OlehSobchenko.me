@@ -14,6 +14,7 @@
  * @typedef {Object} Type
  * @property {string} id
  * @property {Localization} name
+ * @property {string} [icon]
  */
 
 /**
@@ -151,6 +152,35 @@ const getPosts = async () => {
     return post;
   });
 }
+
+/**
+ * Renders post header icon
+ *
+ * @param {PostRenderOptions} options
+ * @returns {void}
+ */
+const renderHeaderIcon = (options) => {
+  const { rootElement, lang, post } = options;
+  const type = post.type;
+
+  if (!type) {
+    return;
+  }
+
+  const iconContainer = document.createElement('div');
+  const iconSpan = document.createElement('span');
+
+  const iconDoc = new DOMParser().parseFromString(
+    type.icon,
+    'application/xml');
+
+  iconSpan.appendChild(
+    iconSpan.ownerDocument.importNode(iconDoc.documentElement, true),
+  );
+  iconContainer.classList.add('post-header-icon');
+  iconContainer.appendChild(iconSpan);
+  rootElement.appendChild(iconContainer);
+};
 
 /**
  * Renders post header
@@ -468,6 +498,7 @@ const renderLink = (options) => {
 const createPost = (post, lang = 'uk') => {
   const rootElement = document.createElement('div');
   const headerElement = document.createElement('div');
+  const headerTextElement = document.createElement('div');
   const mediaElement = document.createElement('div');
   const bodyElement = document.createElement('div');
   const dividerElement = document.createElement('div');
@@ -483,6 +514,10 @@ const createPost = (post, lang = 'uk') => {
     ...partialOptions,
     rootElement: headerElement,
   };
+  const headerTextOptions = {
+    ...partialOptions,
+    rootElement: headerTextElement,
+  };
   const mediaOptions = {
     ...partialOptions,
     rootElement: mediaElement,
@@ -492,8 +527,11 @@ const createPost = (post, lang = 'uk') => {
     rootElement: bodyElement,
   };
 
-  renderHeaderTitle(headerOptions);
-  renderDate(headerOptions);
+  headerElement.appendChild(headerTextElement);
+
+  renderHeaderIcon(headerOptions);
+  renderHeaderTitle(headerTextOptions);
+  renderDate(headerTextOptions);
   renderImage(mediaOptions);
   renderVideo(mediaOptions);
   renderTitle(bodyOptions);
@@ -504,6 +542,7 @@ const createPost = (post, lang = 'uk') => {
   renderLink(bodyOptions);
 
   rootElement.append(headerElement, mediaElement, bodyElement, dividerElement);
+  rootElement.setAttribute('data-post-id', post.id);
 
   return rootElement;
 };
@@ -540,13 +579,12 @@ const renderMasonry = (items, columnsNumber = 2) => {
   return masonryContainer;
 };
 
-const renderPosts = async (containerId, lang = 'uk') => {
+const renderPosts = async (containerId, lang = 'uk', desktop = true) => {
   const posts = await getPosts();
   const postElements = posts.map(post => createPost(post, lang));
   const container = document.getElementById(containerId);
-  const width = document.body.clientWidth;
 
-  if (width > 950) {
+  if (desktop) {
     const masonry = renderMasonry(postElements);
     const newPostsElementsContainer = document.createElement('div')
 
@@ -562,18 +600,30 @@ const renderPosts = async (containerId, lang = 'uk') => {
   container.replaceChildren(newPostsElementsContainer);
 };
 
+const isDesktop = () => {
+  return document.body.clientWidth >
+    window.applicationConstants.mobileBreakpoint;
+};
+
 const initialPostsRendering = () => {
   const lang = window.applicationState.language;
 
   window.addEventListener('load', async () => {
-    await renderPosts('posts-container', lang);
+    await renderPosts('posts-container', lang, isDesktop());
   });
 };
 
 window.addEventListener('resize', async () => {
   const lang = window.applicationState.language;
+  const desktop = isDesktop();
 
-  await renderPosts('posts-container', lang);
+  if (window.applicationState.isDesktop === desktop) {
+    return ;
+  }
+
+  await renderPosts('posts-container', lang, desktop);
+
+  window.applicationState.isDesktop = isDesktop();
 });
 
 initialPostsRendering();
