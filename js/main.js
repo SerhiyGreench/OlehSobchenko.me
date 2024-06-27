@@ -239,7 +239,8 @@ const handleLocalize = async () => {
 };
 
 const handleScrollDownScreenHeight = () => {
-  const clientHeight = document.documentElement.clientHeight;
+  const mainPart = document.getElementById('main-part');
+  const clientHeight = mainPart.getBoundingClientRect().height;
   const scrollTop = document.documentElement.scrollTop;
 
   window.scrollBy({

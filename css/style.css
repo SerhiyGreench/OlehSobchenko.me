@@ -96,22 +96,16 @@ blockquote:before {
 }
 
 ::-webkit-scrollbar {
-  width: 14px;
+  width: 8px;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
-  margin: 4px;
-  border-right: solid 4px var(--bg-color);
-  border-left: solid 4px var(--bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-color);
-  border-radius: 6px;
-  border-left: solid 4px var(--bg-color);
-  border-right: solid 4px var(--bg-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {

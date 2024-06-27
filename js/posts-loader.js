@@ -564,6 +564,7 @@ const renderMasonry = (items, columnsNumber = 2) => {
   for (let i = 0; i < columnsNumber; i++) {
     const column = document.createElement('div');
 
+    column.classList.add('posts-masonry-column');
     Object.assign(column.style, columnStyles);
     columns.push(column);
     masonryContainer.appendChild(column);
@@ -583,8 +584,8 @@ const renderMasonry = (items, columnsNumber = 2) => {
 const renderPosts = async (
   containerId,
   lang = 'uk',
-  desktop = true,
-  columns = 3,
+  desktop = window.applicationState.isDesktop,
+  columns = window.applicationState.isTablet ? 2 : 3,
 ) => {
   const posts = await getPosts();
   const postElements = posts.map(post => createPost(post, lang));

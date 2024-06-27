@@ -120,6 +120,12 @@
   cursor: pointer;
 }
 
+.posts-masonry-column > div:last-child {
+    .post-divider {
+      display: none;
+    }
+}
+
 @media (min-width: 951px) {
   .post-media {
     margin: 0 var(--main-content-spacing) 0;
@@ -128,5 +134,13 @@
   .post-divider {
     margin: 30px var(--main-content-spacing) 0;
     border-bottom: 8px solid var(--main-color);
+  }
+}
+
+@media (max-width: 950px) {
+  #posts-container > div > div.post-container:last-child {
+    .post-divider {
+      display: none;
+    }
   }
 }
