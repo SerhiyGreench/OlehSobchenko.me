@@ -159,8 +159,8 @@ const getPosts = async () => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderHeaderIcon = (options) => {
-  const { rootElement, lang, post } = options;
+const renderHeaderIcon = options => {
+  const { rootElement, post } = options;
   const type = post.type;
 
   if (!type) {
@@ -169,13 +169,16 @@ const renderHeaderIcon = (options) => {
 
   const iconContainer = document.createElement('div');
   const iconSpan = document.createElement('span');
-
   const iconDoc = new DOMParser().parseFromString(
     type.icon,
-    'application/xml');
+    'application/xml',
+  );
 
   iconSpan.appendChild(
-    iconSpan.ownerDocument.importNode(iconDoc.documentElement, true),
+    iconSpan.ownerDocument.importNode(
+      iconDoc.documentElement,
+      true,
+    ),
   );
   iconContainer.classList.add('post-header-icon');
   iconContainer.appendChild(iconSpan);
@@ -188,7 +191,7 @@ const renderHeaderIcon = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderHeaderTitle = (options) => {
+const renderHeaderTitle = options => {
   const { rootElement, lang, post } = options;
   const category = post.category;
   const type = post.type;
@@ -233,7 +236,7 @@ const renderHeaderTitle = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderDate = (options) => {
+const renderDate = options => {
   const { rootElement, post } = options;
 
   if (!post.happenedAt) {
@@ -254,7 +257,7 @@ const renderDate = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderImage = (options) => {
+const renderImage = options => {
   const { rootElement, lang, post } = options;
   const image = post.image
 
@@ -283,7 +286,7 @@ const renderImage = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderVideo = (options) => {
+const renderVideo = options => {
   const { rootElement, lang, post } = options;
   const video = post.video;
 
@@ -319,7 +322,7 @@ const renderVideo = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderTitle = (options) => {
+const renderTitle = options => {
   const { rootElement, lang, post } = options;
   const title = post.title;
 
@@ -340,7 +343,7 @@ const renderTitle = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderDescription = (options) => {
+const renderDescription = options => {
   const { rootElement, lang, post } = options;
   const shortDescription = post.shortDescription;
   const description = post.description;
@@ -378,7 +381,7 @@ const renderDescription = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderAudio = (options) => {
+const renderAudio = options => {
   const { rootElement, lang, post } = options;
   const audio = post.audio;
 
@@ -430,7 +433,7 @@ const renderAudio = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderQuote = (options) => {
+const renderQuote = options => {
   const { rootElement, lang, post } = options;
   const quote = post.quote;
 
@@ -454,7 +457,7 @@ const renderQuote = (options) => {
  * @param {PostRenderOptions} options
  * @returns {void}
  */
-const renderLink = (options) => {
+const renderLink = options => {
   const { rootElement, lang, post } = options;
   const link = post.link;
 
@@ -621,7 +624,12 @@ const initialPostsRendering = () => {
   const lang = window.applicationState.language;
 
   window.addEventListener('load', async () => {
-    await renderPosts('posts-container', lang, isDesktop());
+    await renderPosts(
+      'posts-container',
+      lang,
+      isDesktop(),
+      isTablet() ? 2 : 3,
+    );
   });
 };
 

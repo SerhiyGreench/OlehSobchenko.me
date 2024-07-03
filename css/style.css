@@ -538,7 +538,7 @@ input[type="range"]::-ms-thumb {
   }
 
   .main-quote-container {
-    font-size: 28px;
+    font-size: 25px;
   }
 
   .main-action-bar-container {
@@ -631,7 +631,7 @@ input[type="range"]::-ms-thumb {
   }
 
   .simple-modal-content {
-    padding: 0 calc(var(--main-content-spacing)) var(--main-content-spacing);
+    padding: 0 var(--main-content-spacing) var(--main-content-spacing);
   }
 
   .simple-modal-header {

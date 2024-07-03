@@ -269,7 +269,7 @@ const closeModal = () => {
   document.body.classList.remove('simple-modal-open');
 };
 
-window.addEventListener('load', function () {
+window.addEventListener('load', async () => {
   document.addEventListener('click', event => {
     if (event.target.classList.contains('simple-modal')) {
       closeModal();
@@ -284,6 +284,10 @@ window.addEventListener('load', function () {
       );
     }
   });
+
+  const categories = await getCategories();
+
+
 });
 
 const handleCollapsibleContainer = (id) => {

@@ -11,6 +11,7 @@
   align-items: flex-start;
   justify-content: flex-end;
   flex-direction: column;
+  padding: 0 10px;
 }
 
 .music-number {
@@ -19,12 +20,13 @@
 }
 
 .music-name {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
 }
 
 .music-singer {
   margin-top: 5px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
 }
 
 .slider-container {
@@ -41,6 +43,7 @@
   background: var(--main-color);
   cursor: pointer;
   width: 100%;
+  margin: 0 -1px;
 }
 
 .time-range:hover {
@@ -62,84 +65,75 @@
   right: 0;
 }
 
-.buttons i {
+.audio-control-buttons svg {
   cursor: pointer;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.btn {
-  padding: 25px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  opacity: 1;
-}
-
-.loader {
-  height: 70px;
+.audio-control-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.loader .stroke {
-  background: var(--bg-color);
-  height: 150%;
-  width: 10px;
-  border-radius: 50px;
-  margin: 0px 5px;
-  animation: animate 1.4s linear infinite;
+.audio-button {
+  padding: 15px;
 }
 
-@keyframes animate {
-  50% {
-    height: 20%;
-    background: #4286f4;
-  }
-
-  100% {
-    height: 100%;
-  }
-}
-
-.stroke:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.stroke:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.stroke:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.stroke:nth-child(4) {
-  animation-delay: 0.9s;
-}
-
-.stroke:nth-child(5) {
-  animation-delay: 0.6s;
-}
-
-.stroke:nth-child(6) {
-  animation-delay: 0.3s;
-}
-
-.stroke:nth-child(7) {
-  animation-delay: 0s;
-}
-
-.randomActive {
-  color: #222;
+.audio-button:hover {
+  opacity: 1;
 }
 
 .audio-control-container {
   display: flex;
+  padding: 30px 40px 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.audio-control-container > div {
+  width: calc(100% / 3);
+}
+
+.operation-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+
+  .operation-button {
+    padding: 10px;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 950px) {
+  .audio-control-container {
+    padding: 30px 0 5px;
+  }
+
+  .audio-start-time,
+  .audio-end-time {
+    padding: 6px;
+  }
+
+  .music-name {
+    font-size: 1.5rem;
+  }
+
+  .music-singer {
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+  }
+
+  .previous-audio-button,
+  .next-audio-button {
+    display: none;
+  }
+
+  .music-number {
+    font-size: 0.4rem;
+  }
 }

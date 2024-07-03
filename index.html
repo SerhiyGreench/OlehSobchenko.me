@@ -44,7 +44,7 @@
     rel="stylesheet">
 
   <script src="js/init.js"></script>
-  <!--  <script src="js/player.js"></script>-->
+  <script src="js/player.js"></script>
   <script src="js/posts-loader.js"></script>
   <script src="js/main.js"></script>
 </head>
@@ -198,252 +198,261 @@
         </div>
       </div>
     </div>
-    <div id="tags-container" class="secondary-container collapsible-container">
-      <div class="container-title">
-        <div class="container-title-text"
-             data-localization-key="tags-title">ТЕГИ
-        </div>
-        <div class="collapse-icon">
-          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"
-               width="48px" viewBox="0 -960 960 960">
-            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
-          </svg>
-          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"
-               width="72px" viewBox="0 -960 960 960">
-            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>
-          </svg>
-        </div>
-      </div>
+    <!--    <div id="tags-container" class="secondary-container collapsible-container">-->
+    <!--      <div class="container-title">-->
+    <!--        <div class="container-title-text"-->
+    <!--             data-localization-key="tags-title">ТЕГИ-->
+    <!--        </div>-->
+    <!--        <div class="collapse-icon">-->
+    <!--          <svg class="mobile" xmlns="http://www.w3.org/2000/svg" height="48px"-->
+    <!--               width="48px" viewBox="0 -960 960 960">-->
+    <!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
+    <!--          </svg>-->
+    <!--          <svg class="desktop" xmlns="http://www.w3.org/2000/svg" height="72px"-->
+    <!--               width="72px" viewBox="0 -960 960 960">-->
+    <!--            <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/>-->
+    <!--          </svg>-->
+    <!--        </div>-->
+    <!--      </div>-->
 
+  </div>
+  <div id="life-story-container">
+    <div class="container-title life-story-title"
+         data-localization-key="life-title">ЖИТТЄПИС
     </div>
-    <div id="life-story-container">
-      <div class="container-title life-story-title" data-localization-key="life-title">ЖИТТЄПИС
-      </div>
 
-      <div id="posts-container">
-        <div>
+    <div id="posts-container">
+      <div>
 
-        </div>
       </div>
     </div>
-    <div id="main-play-button" onclick="handlePlay()">
-      <svg xmlns="http://www.w3.org/2000/svg" height="72px"
-           viewBox="0 0 24 24"
-           width="72px">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path
-          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-      </svg>
+  </div>
+  <div id="main-play-button" onclick="handlePlay()">
+    <svg xmlns="http://www.w3.org/2000/svg" height="72px"
+         viewBox="0 0 24 24"
+         width="72px">
+      <path d="M0 0h24v24H0V0z" fill="none"/>
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+    </svg>
+  </div>
+</div>
+
+<div class="audio-player">
+
+  <div class="slider-container">
+    <div class="audio-start-time">0:00</div>
+    <input type="range" class="time-range" min="0" max="100" value="0">
+    <div class="audio-end-time">0:00</div>
+  </div>
+
+  <div class="audio-control-container">
+    <div class="details">
+      <div class="music-name">Audio Name</div>
+      <div class="music-singer">Description</div>
+    </div>
+
+    <div class="audio-control-buttons">
+      <div class="previous-audio-button audio-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="38px"
+             viewBox="0 0 24 24" width="38px">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+        </svg>
+      </div>
+      <div class="play-pause-audio-button audio-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="54px"
+             viewBox="0 0 24 24" width="54px">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+      <div class="next-audio-button audio-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="38px"
+             viewBox="0 0 24 24" width="38px">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="operation-buttons-container">
+      <div class="playlist-button operation-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="40px"
+             viewBox="0 -960 960 960" width="40px">
+          <path
+            d="M641.96-160q-48.63 0-82.63-34.04-34-34.04-34-82.67 0-48.62 33.45-82.62 33.44-34 81.22-34 14.31 0 27.32 2.5T692-382v-338h188v74H758.67v370q0 48.33-34.04 82.17Q690.59-160 641.96-160ZM120-320v-66.67h310.67V-320H120Zm0-166.67v-66.66h475.33v66.66H120Zm0-166.66V-720h475.33v66.67H120Z"/>
+        </svg>
+      </div>
+      <div class="close-audio-player-button operation-button"
+           onclick="handlePlay()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="40px"
+             viewBox="0 -960 960 960" width="40px">
+          <path
+            d="m251.33-204.67-46.66-46.66L433.33-480 204.67-708.67l46.66-46.66L480-526.67l228.67-228.66 46.66 46.66L526.67-480l228.66 228.67-46.66 46.66L480-433.33 251.33-204.67Z"/>
+        </svg>
+      </div>
     </div>
   </div>
 
-  <div class="audio-player">
+  <audio src="" class="music"></audio>
+</div>
 
-    <div class="slider-container">
-      <div class="audio-start-time">0:00</div>
-      <input type="range" class="time-range" min="0" max="100" value="0">
-      <div class="audio-end-time">0:00</div>
-    </div>
-
-    <div class="audio-control-container">
-      <div class="details">
-        <div class="music-name">Audio Name</div>
-        <div class="music-singer">Description</div>
+<div id="search-modal" class="simple-modal">
+  <div class="simple-modal-body">
+    <div class="simple-modal-header search-modal-header">
+      <div class="simple-modal-title">
+        <div class="search-input-wrapper">
+          <input autofocus class="standard-input search-input" type="text"
+                 placeholder="Пошук..."
+                 data-localization-key="search-input-placeholder"/>
+        </div>
       </div>
-
-      <div class="buttons">
-        <div class="prev-btn btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="40px"
-               viewBox="0 0 24 24" width="40px">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-          </svg>
-        </div>
-        <div class="playpause-btn btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 0 24 24" width="48px">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </div>
-        <div class="next-btn btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="40px"
-               viewBox="0 0 24 24" width="40px">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-          </svg>
-        </div>
-
-        <audio src="" class="music"></audio>
+      <div class="simple-modal-close-button" onclick="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+             viewBox="0 -960 960 960" width="48px">
+          <path
+            d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+        </svg>
       </div>
     </div>
-
-    <div id="wave">
-      <span class="stroke"></span>
-      <span class="stroke"></span>
-      <span class="stroke"></span>
-      <span class="stroke"></span>
-      <span class="stroke"></span>
-      <span class="stroke"></span>
-      <span class="stroke"></span>
+    <div class="simple-modal-content"
+         data-localization-key="search-results-title">
+      Результати
     </div>
   </div>
+</div>
+<div id="biography-modal" class="simple-modal">
+  <div class="simple-modal-body">
+    <div class="simple-modal-header search-modal-header">
+      <div class="simple-modal-title"
+           data-localization-key="biography-title">
+        БІОГРАФІЯ
+      </div>
+      <div class="simple-modal-close-button" onclick="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+             viewBox="0 -960 960 960" width="48px">
+          <path
+            d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="simple-modal-content">
+      <div class="rich-article" data-localization-key="biography-article">
+        <p>Олег Андрійович Собченко (нар. 4 грудня 1973,
+          Корсунь-Шевченківський — пом. 24 січня 2023) — український
+          громадський діяч, військовик. Активіст Євромайдану. Учасник
+          російсько-української війни з 2014, герой оборони Києва у березні
+          2022, що згідно деяких оцінок був одним з тих, хто врятував Київ
+          від захоплення росіянами.</p>
 
-  <div id="search-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title">
-          <div class="search-input-wrapper">
-            <input autofocus class="standard-input search-input" type="text"
-                   placeholder="Пошук..."
-                   data-localization-key="search-input-placeholder"/>
-          </div>
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
+        <h2>Життєпис до 2022</h2>
+        <p>Народився 4 грудня 1973 у Корсунь-Шевченківському Черкаської
+          області, закінчив там школу і надалі проживав. Був підприємцем.
+
+        <p>Олег Собченко був активним членом фонду Героїка, що боровся за
+          увічнення памяті про борців за державність України. Як тесляр і
+          каменяр Олег Собченко впродовж багатьох років безкорисливо
+          працював над відновленням памятників. Згідно спогадів речника
+          Генштабу ЗСУ Андрія Ковальова саме Собченко реалізовував всі
+          масштабні проєкти "Героїки" своїми руками.</p>
+
+        <p>Олег Собченко був учасником багатьох патріотичних вуличних акцій,
+          зокрема Мовного Майдану.</p>
+
+        <p>З початком Революції Гідності став її активістом, був сотником
+          Самооборони Майдану. Під час протистояння з Беркутом у Черкасах
+          отримав чисельні забої. 20 лютого 2019 за заслуги під час
+          Революції Гідності Олег Собченко отримав Орден «За мужність» III
+          ступеня.</p>
+
+        <p>З початком 2014 Російсько-української війни воював до 2016 у
+          складі одного з підрозділів батальйону Азов який з жовтня 2014
+          став полком «Азов».</p>
+
+        <p>Після повернення після служби в Азові до Корсуня-Шевченківського
+          боровся щоб врятувати річку Рось від забруднення і обміління.</p>
+
+        <h2>Участь у війні з Росією у 2022-23 роках</h2>
+        <p>З початком повномасштабного вторгнення у лютому 2022 долучився до
+          72 омбр ім. Чорних Запорожців оператором-аеророзвідником. На
+          початку березня 2022 року брав участь в битві за Київ: боях у
+          районі Лютіж — Демидів — Козаровичі, в тому числі — за греблю в
+          Козаровичах та за село Мощун.</p>
+
+        <p>3 травня 2022 року за особисту мужність і самовіддані дії,
+          виявлені у захисті державного суверенітету та територіальної
+          цілісності України, вірність військовій присязі Олег Собченко
+          отримав Орден «За мужність» II ступеня.</p>
+
+        <p>Загинув 24 січня 2023 року від отриманих поранень у результаті
+          російського артилерійського обстрілу в м. Вугледар на Донеччині.
+          Похований у м. Корсунь-Шевченківський на Черкащині.</p>
+
+        <h2>Вшанування пам'яті</h2>
+        <p>У місті Корсунь-Шевченківський перейменували вулицю 4-ту
+          Гвардійську іменем Олега Собченка.</p>
+
+        <h2>Нагороди</h2>
+        <p>
+          Орден «За мужність» I ступеня (16 серпня 2023, посмертно) — за
+          особисту мужність, виявлену у захисті державного суверенітету та
+          територіальної цілісності України, самовіддане виконання
+          військового обов’язку<br/>
+          Орден «За мужність» II ступеня (3 травня 2022) — за особисту
+          мужність і самовіддані дії, виявлені у захисті державного
+          суверенітету та територіальної цілісності України, вірність
+          військовій присязі<br/>
+          Орден «За мужність» IIІ ступеня (20 лютого 2019) — за громадянську
+          мужність, самовіддане відстоювання конституційних засад
+          демократії, прав і свобод людини, виявлені під час Революції
+          Гідності, плідну громадську та волонтерську діяльність<br/>
+          Нагрудний знак «Учасник АТО»<br/>
+          Медаль «За жертовність і любов до України» Української
+          православної церкви Київського патріархату.<br/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="select-language-modal" class="simple-modal">
+  <div class="simple-modal-body">
+    <div class="simple-modal-header search-modal-header">
+      <div class="simple-modal-title" data-localization-key="language-title">
+        МОВА
+      </div>
+      <div class="simple-modal-close-button" onclick="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+             viewBox="0 -960 960 960" width="48px">
+          <path
+            d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="simple-modal-content">
+      <div class="full-language-selector">
+        <div id="language-item-uk" class="selector-language-item selected"
+             data-language-item="uk" onclick="handleLanguageSelect('uk')">
+          <div class="selector-language-name">Українська</div>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+               viewBox="0 -960 960 960" width="24px">
             <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+              d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
           </svg>
         </div>
-      </div>
-      <div class="simple-modal-content"
-           data-localization-key="search-results-title">
-        Результати
-      </div>
-    </div>
-  </div>
-  <div id="biography-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title"
-             data-localization-key="biography-title">
-          БІОГРАФІЯ
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
+        <div id="language-item-en" class="selector-language-item"
+             data-language-item="en" onclick="handleLanguageSelect('en')">
+          <div class="selector-language-name">English</div>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+               viewBox="0 -960 960 960" width="24px">
             <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
+              d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
           </svg>
-        </div>
-      </div>
-      <div class="simple-modal-content">
-        <div class="rich-article" data-localization-key="biography-article">
-          <p>Олег Андрійович Собченко (нар. 4 грудня 1973,
-            Корсунь-Шевченківський — пом. 24 січня 2023) — український
-            громадський діяч, військовик. Активіст Євромайдану. Учасник
-            російсько-української війни з 2014, герой оборони Києва у березні
-            2022, що згідно деяких оцінок був одним з тих, хто врятував Київ
-            від захоплення росіянами.</p>
-
-          <h2>Життєпис до 2022</h2>
-          <p>Народився 4 грудня 1973 у Корсунь-Шевченківському Черкаської
-            області, закінчив там школу і надалі проживав. Був підприємцем.
-
-          <p>Олег Собченко був активним членом фонду Героїка, що боровся за
-            увічнення памяті про борців за державність України. Як тесляр і
-            каменяр Олег Собченко впродовж багатьох років безкорисливо
-            працював над відновленням памятників. Згідно спогадів речника
-            Генштабу ЗСУ Андрія Ковальова саме Собченко реалізовував всі
-            масштабні проєкти "Героїки" своїми руками.</p>
-
-          <p>Олег Собченко був учасником багатьох патріотичних вуличних акцій,
-            зокрема Мовного Майдану.</p>
-
-          <p>З початком Революції Гідності став її активістом, був сотником
-            Самооборони Майдану. Під час протистояння з Беркутом у Черкасах
-            отримав чисельні забої. 20 лютого 2019 за заслуги під час
-            Революції Гідності Олег Собченко отримав Орден «За мужність» III
-            ступеня.</p>
-
-          <p>З початком 2014 Російсько-української війни воював до 2016 у
-            складі одного з підрозділів батальйону Азов який з жовтня 2014
-            став полком «Азов».</p>
-
-          <p>Після повернення після служби в Азові до Корсуня-Шевченківського
-            боровся щоб врятувати річку Рось від забруднення і обміління.</p>
-
-          <h2>Участь у війні з Росією у 2022-23 роках</h2>
-          <p>З початком повномасштабного вторгнення у лютому 2022 долучився до
-            72 омбр ім. Чорних Запорожців оператором-аеророзвідником. На
-            початку березня 2022 року брав участь в битві за Київ: боях у
-            районі Лютіж — Демидів — Козаровичі, в тому числі — за греблю в
-            Козаровичах та за село Мощун.</p>
-
-          <p>3 травня 2022 року за особисту мужність і самовіддані дії,
-            виявлені у захисті державного суверенітету та територіальної
-            цілісності України, вірність військовій присязі Олег Собченко
-            отримав Орден «За мужність» II ступеня.</p>
-
-          <p>Загинув 24 січня 2023 року від отриманих поранень у результаті
-            російського артилерійського обстрілу в м. Вугледар на Донеччині.
-            Похований у м. Корсунь-Шевченківський на Черкащині.</p>
-
-          <h2>Вшанування пам'яті</h2>
-          <p>У місті Корсунь-Шевченківський перейменували вулицю 4-ту
-            Гвардійську іменем Олега Собченка.</p>
-
-          <h2>Нагороди</h2>
-          <p>
-            Орден «За мужність» I ступеня (16 серпня 2023, посмертно) — за
-            особисту мужність, виявлену у захисті державного суверенітету та
-            територіальної цілісності України, самовіддане виконання
-            військового обов’язку<br/>
-            Орден «За мужність» II ступеня (3 травня 2022) — за особисту
-            мужність і самовіддані дії, виявлені у захисті державного
-            суверенітету та територіальної цілісності України, вірність
-            військовій присязі<br/>
-            Орден «За мужність» IIІ ступеня (20 лютого 2019) — за громадянську
-            мужність, самовіддане відстоювання конституційних засад
-            демократії, прав і свобод людини, виявлені під час Революції
-            Гідності, плідну громадську та волонтерську діяльність<br/>
-            Нагрудний знак «Учасник АТО»<br/>
-            Медаль «За жертовність і любов до України» Української
-            православної церкви Київського патріархату.<br/>
-          </p>
         </div>
       </div>
     </div>
   </div>
-  <div id="select-language-modal" class="simple-modal">
-    <div class="simple-modal-body">
-      <div class="simple-modal-header search-modal-header">
-        <div class="simple-modal-title" data-localization-key="language-title">
-          МОВА
-        </div>
-        <div class="simple-modal-close-button" onclick="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="48px"
-               viewBox="0 -960 960 960" width="48px">
-            <path
-              d="m248.13-189.91-57.78-58.22L422.22-480 190.35-711.74l57.78-58.78 232.3 231.74 231.44-231.74 57.78 58.78L538.78-480l230.87 231.87-57.78 58.22-231.44-231.74-232.3 231.74Z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="simple-modal-content">
-        <div class="full-language-selector">
-          <div id="language-item-uk" class="selector-language-item selected"
-               data-language-item="uk" onclick="handleLanguageSelect('uk')">
-            <div class="selector-language-name">Українська</div>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                 viewBox="0 -960 960 960" width="24px">
-              <path
-                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
-            </svg>
-          </div>
-          <div id="language-item-en" class="selector-language-item"
-               data-language-item="en" onclick="handleLanguageSelect('en')">
-            <div class="selector-language-name">English</div>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                 viewBox="0 -960 960 960" width="24px">
-              <path
-                d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
 </body>
 </html>
