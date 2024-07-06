@@ -11,8 +11,8 @@ const handleLocation = async () => {
 
   console.log(path);
 
-  const firstParam = params[1];
-  const secondParam = params[2];
+  const firstParam = params[0];
+  const secondParam = params[1];
 
   console.log(path);
   console.log(window.applicationOperations.openPost.toString());
