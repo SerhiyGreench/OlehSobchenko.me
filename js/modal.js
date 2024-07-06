@@ -17,7 +17,7 @@ const closeModal = () => {
 const closePostModal = () => {
   closeModal();
 
-  window.location.assign('/');
+  window.history.pushState({}, '', '/');
 
   const post = document.getElementById('post-modal');
 

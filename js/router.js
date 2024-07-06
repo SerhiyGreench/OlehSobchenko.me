@@ -13,8 +13,6 @@ const handleLocation = async () => {
 
   const postId = url.searchParams.get('post');
 
-  console.log(postId);
-
   if (postId) {
     window.applicationOperations.openPost(postId);
 
