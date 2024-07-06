@@ -156,13 +156,6 @@ body.simple-modal-open {
   margin-right: 30px;
 }
 
-.simple-modal-content {
-  padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
-  margin: var(--main-content-spacing) 0 56px;
-  overflow-y: scroll;
-  height: calc(100vh - 3 * var(--main-content-spacing) - 57px);
-}
-
 body.simple-modal-open {
   overflow: hidden;
 }
@@ -184,7 +177,7 @@ body.simple-modal-open {
 
 .simple-modal-content {
   padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
-  margin: var(--main-content-spacing) 0 72px;
+  margin: var(--main-content-spacing) 0 48px;
   overflow-y: scroll;
   height: calc(100vh - 2 * var(--main-content-spacing) - 57px);
 }
