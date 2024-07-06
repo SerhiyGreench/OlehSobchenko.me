@@ -689,8 +689,7 @@ const openPost = async path => {
   }
 
   const lang = window.applicationState.language;
-  const [contentContainer] = postModal.getElementsByClassName('');
-
+  const [contentContainer] = postModal.getElementsByClassName('simple-modal-content');
   const rootElement = document.createElement('div');
 
   renderPostElements(post, lang, rootElement);
