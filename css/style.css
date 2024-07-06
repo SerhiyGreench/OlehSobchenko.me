@@ -186,7 +186,7 @@ body.simple-modal-open {
   padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
   margin: var(--main-content-spacing) 0 72px;
   overflow-y: scroll;
-  height: calc(100vh - 3 * var(--main-content-spacing) - 57px);
+  height: calc(100vh - 2 * var(--main-content-spacing) - 57px);
 }
 
 #main-part {
