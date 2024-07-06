@@ -684,7 +684,7 @@ const openPost = async path => {
 
   const postModal = document.getElementById('post-modal');
 
-  if (postModal) {
+  if (!postModal) {
     return;
   }
 

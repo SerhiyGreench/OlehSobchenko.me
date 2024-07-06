@@ -15,6 +15,12 @@ const handleLocation = async () => {
 
   console.log(postId);
 
+  if (postId) {
+    window.applicationOperations.openPost(postId);
+
+    return;
+  }
+
   const firstParam = params[0];
   const secondParam = params[1];
 
