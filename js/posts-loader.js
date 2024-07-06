@@ -137,13 +137,16 @@ const getLocalized = (item, lang) => {
  * @returns {Promise<Post[]>}
  */
 const getPosts = async () => {
+  if (window.applicationState.postsCache) {
+    return window.applicationState.postsCache;
+  }
+
   const [categories, types, rawPosts] = await Promise.all([
     getCategories(),
     getTypes(),
     getRawPosts(),
   ]);
-
-  return rawPosts.map(post => {
+  const posts = rawPosts.map(post => {
     const category = categories.find(c => c.id === post.categoryId);
     const type = types.find(t => t.id === post.typeId);
 
@@ -151,6 +154,10 @@ const getPosts = async () => {
 
     return post;
   });
+
+  window.applicationState.postsCache = posts;
+
+  return posts;
 }
 
 /**
@@ -491,15 +498,7 @@ const renderLink = options => {
   rootElement.appendChild(linkContainerElement);
 };
 
-/**
- * Get array of posts from website data
- *
- * @param {Post} post
- * @param {'uk' | 'en'} lang
- * @returns {HTMLElement}
- */
-const createPost = (post, lang = 'uk') => {
-  const rootElement = document.createElement('div');
+function renderPostElements(post, lang, rootElement) {
   const headerElement = document.createElement('div');
   const headerTextElement = document.createElement('div');
   const mediaElement = document.createElement('div');
@@ -545,7 +544,24 @@ const createPost = (post, lang = 'uk') => {
   renderLink(bodyOptions);
 
   rootElement.append(headerElement, mediaElement, bodyElement, dividerElement);
+}
+
+/**
+ * Get array of posts from website data
+ *
+ * @param {Post} post
+ * @param {'uk' | 'en'} lang
+ * @returns {HTMLElement}
+ */
+const createPost = (post, lang = 'uk') => {
+  const rootElement = document.createElement('div');
+
+  renderPostElements(post, lang, rootElement);
+
   rootElement.setAttribute('data-post-id', post.id);
+  rootElement.addEventListener('click', () => {
+    window.location.assign(`/post/${ post.path || post.id }`);
+  });
 
   return rootElement;
 };
@@ -657,3 +673,29 @@ window.addEventListener('resize', async () => {
 });
 
 initialPostsRendering();
+
+const openPost = async path => {
+  const posts = await getPosts();
+  const post = posts.find(p => p.path === path || p.id === path);
+
+  if (!post) {
+    return;
+  }
+
+  const postModal = document.getElementById('post-modal');
+
+  if (postModal) {
+    return;
+  }
+
+  const lang = window.applicationState.language;
+  const [contentContainer] = postModal.getElementsByClassName('');
+
+  const rootElement = document.createElement('div');
+
+  renderPostElements(post, lang, rootElement);
+  contentContainer.appendChild(rootElement);
+  openModal('post-modal');
+};
+
+Object.assign(window.applicationOperations, { openPost });

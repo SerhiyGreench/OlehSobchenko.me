@@ -253,22 +253,6 @@ const handleScrollDownScreenHeight = () => {
   });
 };
 
-const openModal = id => {
-  const modal = document.getElementById(id);
-
-  modal.classList.add('open');
-  document.body.classList.add('simple-modal-open');
-
-  modal.querySelectorAll('[autofocus]').forEach(e => {
-    e.focus();
-  });
-};
-
-const closeModal = () => {
-  document.querySelector('.simple-modal.open').classList.remove('open');
-  document.body.classList.remove('simple-modal-open');
-};
-
 window.addEventListener('load', async () => {
   document.addEventListener('click', event => {
     if (event.target.classList.contains('simple-modal')) {
@@ -284,10 +268,6 @@ window.addEventListener('load', async () => {
       );
     }
   });
-
-  const categories = await getCategories();
-
-
 });
 
 const handleCollapsibleContainer = (id) => {
