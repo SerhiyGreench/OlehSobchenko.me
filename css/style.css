@@ -477,6 +477,11 @@ input[type="range"]::-ms-thumb {
   margin: 0;
 }
 
+#life-story-container {
+  margin: 0 auto;
+  max-width: 1920px;
+}
+
 .life-story-title {
   padding: var(--main-content-spacing) var(--main-content-spacing) 0;
 }
