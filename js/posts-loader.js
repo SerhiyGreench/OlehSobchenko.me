@@ -561,6 +561,7 @@ const createPost = (post, lang = 'uk') => {
   rootElement.setAttribute('data-post-id', post.id);
   rootElement.addEventListener('click', () => {
     window.history.pushState({}, '', `/post/${ post.path || post.id }`);
+    window.applicationOperations.openPost(post.path || post.id);
   });
 
   return rootElement;

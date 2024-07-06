@@ -9,7 +9,7 @@ const applicationConstants = {
 };
 
 const applicationOperations = {
-  openPost: path => {},
+  openPost: () => {},
 };
 
 Object.assign(window, {

@@ -16,11 +16,9 @@ const closeModal = () => {
 
 const closePostModal = () => {
   closeModal();
-
   window.history.pushState({}, '', '/');
 
   const post = document.getElementById('post-modal');
-
   const elementsToClean = [
     post.getElementsByClassName('simple-modal-title')[0],
     post.getElementsByClassName('simple-modal-content')[0],
