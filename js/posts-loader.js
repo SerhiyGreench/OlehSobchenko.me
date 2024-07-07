@@ -320,6 +320,10 @@ const renderVideo = options => {
     wrapperElement.innerHTML = video.data;
   }
 
+  wrapperElement.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
   videoContainerElement.classList.add('post-video');
   wrapperElement.classList.add('post-video-wrapper');
   videoContainerElement.appendChild(wrapperElement);
@@ -400,7 +404,6 @@ const renderAudio = options => {
   }
 
   const audioContainerElement = document.createElement('div');
-
   const audioIconElement = document.createElement('div');
 
   audioIconElement.innerHTML = `
@@ -433,6 +436,10 @@ const renderAudio = options => {
     audioContainerElement.appendChild(postAudioText);
   }
 
+  audioContainerElement.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
   audioContainerElement.classList.add('post-audio');
   rootElement.appendChild(audioContainerElement);
 };
@@ -479,7 +486,10 @@ const renderLink = options => {
   const url = getLocalized(post.link.localization, lang) ||
     post.link.common;
 
-  linkContainerElement.addEventListener('click', () => {
+  linkContainerElement.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+
     window.open(url, '_blank').focus();
   });
 
