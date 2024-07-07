@@ -622,6 +622,10 @@ input[type="range"]::-ms-thumb {
     font-size: 36px;
   }
 
+  .simple-modal {
+    height: calc(100% + var(--main-content-spacing));
+  }
+
   p {
     font-size: 18px;
     margin: 0 0 18px;
