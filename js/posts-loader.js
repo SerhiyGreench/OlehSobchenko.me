@@ -272,6 +272,7 @@ const renderImage = options => {
     return;
   }
 
+  const imgWrapper = document.createElement('div');
   const imgElement = document.createElement('img');
 
   if (image.data) {
@@ -284,7 +285,9 @@ const renderImage = options => {
   }
 
   imgElement.classList.add('post-image');
-  rootElement.appendChild(imgElement);
+  imgWrapper.classList.add('post-image-wrapper');
+  imgWrapper.appendChild(imgElement);
+  rootElement.appendChild(imgWrapper);
 };
 
 /**

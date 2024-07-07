@@ -171,9 +171,16 @@
     margin-right: 0;
   }
 
-  .post-media {
+  .post-image-wrapper {
     position: relative;
-    margin: 0 calc(-3 * var(--main-content-spacing)) 0;
+    margin-right: calc(-3 * var(--main-content-spacing));
+    margin-left: calc(-3 * var(--main-content-spacing));
+  }
+
+  .post-video-wrapper {
+    position: relative;
+    margin-right: calc(-1 * var(--main-content-spacing));
+    margin-left: calc(-1 * var(--main-content-spacing));
   }
 }
 
