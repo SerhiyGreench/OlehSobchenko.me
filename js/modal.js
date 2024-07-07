@@ -10,15 +10,23 @@ const openModal = id => {
 };
 
 const closeModal = () => {
-  document.querySelector('.simple-modal.open').classList.remove('open');
-  document.body.classList.remove('simple-modal-open');
+  document.querySelector('.simple-modal.open')?.classList.remove('open');
+  document.body?.classList.remove('simple-modal-open');
 };
 
-const closePostModal = () => {
+const closePostModal = (redirect = true) => {
   closeModal();
-  window.history.pushState({}, '', '/');
+
+  if (redirect) {
+    window.history.pushState({}, '', '/');
+  }
 
   const post = document.getElementById('post-modal');
+
+  if (!post) {
+    return;
+  }
+
   const elementsToClean = [
     post.getElementsByClassName('simple-modal-title')[0],
     post.getElementsByClassName('simple-modal-content')[0],

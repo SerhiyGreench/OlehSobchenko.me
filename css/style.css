@@ -8,7 +8,7 @@
   --gradient-background-color-end: rgb(255, 255, 255);
   --border-width: 6px;
   --main-content-spacing: 64px;
-  --main-part-height: 100vh;
+  --main-part-height: calc(var(--vh, 1vh) * 100);
   --main-part-background-size: 65vh;
   --main-part-background-position-x: 75%;
   --display-dark-theme-icon: block;
@@ -119,7 +119,6 @@ blockquote:before {
   z-index: 10000;
   background-color: var(--bg-color);
   overflow: hidden;
-  height: 100vh;
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
@@ -179,7 +178,7 @@ body.simple-modal-open {
   padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
   margin: calc(var(--main-content-spacing) / 2) 0 72px;
   overflow-y: scroll;
-  height: calc(100vh - 2 * var(--main-content-spacing) - 57px);
+  height: calc(var(--main-part-height) - 2 * var(--main-content-spacing) - 57px);
 }
 
 .simple-modal-footer {
@@ -620,10 +619,6 @@ input[type="range"]::-ms-thumb {
 
   .simple-modal-title {
     font-size: 36px;
-  }
-
-  .simple-modal {
-    height: calc(100% + var(--main-content-spacing));
   }
 
   p {

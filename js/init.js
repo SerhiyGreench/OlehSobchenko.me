@@ -127,13 +127,14 @@ Object.assign(window, {
   applicationOperations,
 });
 
-function setDynamicVh() {
+window.addEventListener('load', () => {
   const vh = window.innerHeight * 0.01;
 
   document.documentElement.style.setProperty('--vh', `${ vh }px`);
-}
+});
 
-setDynamicVh();
+window.addEventListener('resize', () => {
+  const vh = window.innerHeight * 0.01;
 
-window.addEventListener('resize', setDynamicVh);
-document.querySelector('.simple-modal').style.height = 'calc(var(--vh, 1vh) * 100)';
+  document.documentElement.style.setProperty('--vh', `${ vh }px`);
+});
