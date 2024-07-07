@@ -8,7 +8,8 @@
   --gradient-background-color-end: rgb(255, 255, 255);
   --border-width: 6px;
   --main-content-spacing: 64px;
-  --main-part-height: calc(var(--vh, 1vh) * 100);
+  --main-part-height: 100vh;
+  --with-address-bar-height: calc(var(--vh, 1vh) * 100);
   --main-part-background-size: 65vh;
   --main-part-background-position-x: 75%;
   --display-dark-theme-icon: block;
@@ -178,7 +179,7 @@ body.simple-modal-open {
   padding: 0 calc(2 * var(--main-content-spacing)) var(--main-content-spacing);
   margin: calc(var(--main-content-spacing) / 2) 0 72px;
   overflow-y: scroll;
-  height: calc(var(--main-part-height) - 2 * var(--main-content-spacing) - 57px);
+  height: calc(var(--with-address-bar-height) - 2 * var(--main-content-spacing) - 57px);
 }
 
 .simple-modal-footer {
