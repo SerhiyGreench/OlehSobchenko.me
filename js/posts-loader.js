@@ -498,7 +498,7 @@ const renderLink = options => {
   rootElement.appendChild(linkContainerElement);
 };
 
-function renderPostElements(post, lang, rootElement) {
+function renderPostElements(post, lang) {
   const headerElement = document.createElement('div');
   const headerTextElement = document.createElement('div');
   const mediaElement = document.createElement('div');
@@ -506,7 +506,6 @@ function renderPostElements(post, lang, rootElement) {
   const dividerElement = document.createElement('div');
   const partialOptions = { post, lang };
 
-  rootElement.classList.add('post-container');
   headerElement.classList.add('post-header');
   mediaElement.classList.add('post-media');
   bodyElement.classList.add('post-body');
@@ -543,7 +542,12 @@ function renderPostElements(post, lang, rootElement) {
   // renderOpenFull(bodyOptions);
   renderLink(bodyOptions);
 
-  rootElement.append(headerElement, mediaElement, bodyElement, dividerElement);
+  return {
+    headerElement,
+    mediaElement,
+    bodyElement,
+    dividerElement,
+  };
 }
 
 /**
@@ -556,8 +560,10 @@ function renderPostElements(post, lang, rootElement) {
 const createPost = (post, lang = 'uk') => {
   const rootElement = document.createElement('div');
 
-  renderPostElements(post, lang, rootElement);
-
+  rootElement.classList.add('post-container');
+  rootElement.append(
+    ...Object.values(renderPostElements(post, lang, rootElement)),
+  );
   rootElement.setAttribute('data-post-id', post.id);
   rootElement.addEventListener('click', () => {
     window.history.pushState({}, '', `/post/${ post.path || post.id }`);
@@ -690,11 +696,25 @@ const openPost = async path => {
   }
 
   const lang = window.applicationState.language;
+  const [headerContainer] = postModal.getElementsByClassName('simple-modal-title');
   const [contentContainer] = postModal.getElementsByClassName('simple-modal-content');
-  const rootElement = document.createElement('div');
+  const headerWrapper = document.createElement('div');
+  const contentWrapper = document.createElement('div');
 
-  renderPostElements(post, lang, rootElement);
-  contentContainer.appendChild(rootElement);
+  headerWrapper.classList.add('post-modal-header-wrapper');
+  contentWrapper.classList.add('post-modal-content-wrapper');
+
+  const {
+    headerElement,
+    bodyElement,
+    mediaElement,
+  } = renderPostElements(post, lang);
+
+  headerWrapper.appendChild(headerElement);
+  headerContainer.appendChild(headerWrapper);
+  contentWrapper.append(mediaElement, bodyElement);
+  contentContainer.appendChild(contentWrapper);
+
   openModal('post-modal');
 };
 

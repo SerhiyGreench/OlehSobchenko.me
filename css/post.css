@@ -1,6 +1,7 @@
 .post-container {
   width: 100%;
   padding: 21px 0;
+  cursor: pointer;
 }
 
 .post-header {
@@ -35,6 +36,10 @@
   font-size: 18px;
   line-height: 18px;
   padding: 5px 0 3px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .post-header-title-divider {
@@ -124,6 +129,52 @@
     .post-divider {
       display: none;
     }
+}
+
+.post-modal-header-wrapper {
+  width: 100%;
+
+  .post-header {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .post-header-title {
+    font-size: 22px;
+  }
+
+  .post-date {
+    font-size: 16px;
+  }
+
+  .post-header-icon {
+    margin-right: calc(var(--main-content-spacing) / 2);
+
+    span {
+      height: 40px;
+      padding-bottom: 5px;
+    }
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.post-modal-content-wrapper {
+  .post-body {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .post-media {
+    position: relative;
+    margin: 0 calc(-3 * var(--main-content-spacing)) 0;
+  }
 }
 
 @media (min-width: 951px) {
