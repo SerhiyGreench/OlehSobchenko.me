@@ -9,6 +9,7 @@
   --border-width: 6px;
   --main-content-spacing: 64px;
   --main-part-height: 100vh;
+  --main-part-height-dynamic: 100dvh;
   --with-address-bar-height: calc(var(--vh, 1vh) * 100);
   --main-part-background-size: 65vh;
   --main-part-background-position-x: 75%;
@@ -53,6 +54,10 @@ body {
   font-weight: 700;
   fill: var(--main-color);
   overflow-x: hidden;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 p {
@@ -187,6 +192,7 @@ body.simple-modal-open {
 }
 
 #main-part {
+  height: var(--main-part-height-dynamic);
   height: var(--main-part-height);
   width: 100%;
   background-image: linear-gradient(to bottom, var(--gradient-background-color-start) 80%, var(--gradient-background-color-end)), url("/img/main-photo.svg");
@@ -674,6 +680,7 @@ input[type="range"]::-ms-thumb {
 @media (min-height: 1080px) {
   :root {
     --main-part-height: 1080px;
+    --main-part-height-dynamic: 1080px;
     --main-part-background-size: 720px;
   }
 }

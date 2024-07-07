@@ -212,6 +212,20 @@
       }
     }
   }
+
+  .post-modal-content-wrapper {
+    .post-title {
+      font-size: 42px;
+    }
+
+    .post-description {
+      font-size: 20px;
+    }
+
+    .post-quote {
+      font-size: 24px;
+    }
+  }
 }
 
 @media (max-width: 950px) {
