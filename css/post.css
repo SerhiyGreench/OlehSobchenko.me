@@ -142,14 +142,6 @@
     margin-right: 0;
   }
 
-  .post-header-title {
-    font-size: 22px;
-  }
-
-  .post-date {
-    font-size: 16px;
-  }
-
   .post-header-icon {
     margin-right: calc(var(--main-content-spacing) / 2);
 
@@ -192,6 +184,16 @@
   .post-divider {
     margin: 30px var(--main-content-spacing) 0;
     border-bottom: 8px solid var(--main-color);
+  }
+
+  .post-modal-header-wrapper {
+    .post-header-title {
+      font-size: 22px;
+    }
+
+    .post-date {
+      font-size: 16px;
+    }
   }
 }
 
