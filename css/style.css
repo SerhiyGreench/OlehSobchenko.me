@@ -9,9 +9,8 @@
   --border-width: 6px;
   --main-content-spacing: 64px;
   --main-part-height: 100vh;
-  --vh: 1ch;
   --with-address-bar-height: calc(var(--vh, 1vh) * 100);
-  --main-part-background-size: calc(var(--vh, 1vh) * 65);
+  --main-part-background-size: 65vh;
   --main-part-background-position-x: 75%;
   --display-dark-theme-icon: block;
   --display-light-theme-icon: none;
@@ -192,7 +191,7 @@ body.simple-modal-open {
 }
 
 #main-part {
-  height: var(--with-address-bar-height);
+  height: var(--main-part-height);
   width: 100%;
   background-image: linear-gradient(to bottom, var(--gradient-background-color-start) 80%, var(--gradient-background-color-end)), url("/img/main-photo.svg");
   background-repeat: no-repeat;
@@ -231,7 +230,7 @@ body.simple-modal-open {
 
 #scroll-down-button-container {
   position: absolute;
-  bottom: 40px;
+  top: calc(var(--with-address-bar-height) - 88px);
   right: 0;
   left: 0;
   display: flex;
@@ -510,7 +509,7 @@ input[type="range"]::-ms-thumb {
   :root {
     --border-width: 4px;
     --main-content-spacing: 30px;
-    --main-part-background-size: calc(var(--vh, 1vh) * 50);
+    --main-part-background-size: 50vh;
     --main-part-background-position-x: 50%;
     --h1-custom-font-size: 56px;
     --h2-custom-font-size: 26px;
