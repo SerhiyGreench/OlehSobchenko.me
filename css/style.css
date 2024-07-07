@@ -182,6 +182,10 @@ body.simple-modal-open {
   height: calc(100vh - 2 * var(--main-content-spacing) - 57px);
 }
 
+.simple-modal-footer {
+  min-height: var(--main-content-spacing);
+}
+
 #main-part {
   height: var(--main-part-height);
   width: 100%;

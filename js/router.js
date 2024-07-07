@@ -22,8 +22,10 @@ const handleLocation = async () => {
   const firstParam = params[0];
   const secondParam = params[1];
 
-  if (firstParam === 'post') {
+  if (firstParam === 'post' && secondParam) {
     window.applicationOperations.openPost(secondParam);
+  } else {
+    closePostModal();
   }
 };
 

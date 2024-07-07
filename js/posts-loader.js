@@ -67,6 +67,7 @@
  * @property {HTMLElement} rootElement
  * @property {Post} post
  * @property {'uk' | 'en'} lang
+ * @property {boolean} [short]
  */
 
 /**
@@ -212,23 +213,22 @@ const renderHeaderTitle = options => {
 
   postHeader.classList.add('post-header-title');
 
-
   if (type) {
-    const typePart = document.createElement('div');
+    const typePart = document.createElement('span');
 
     typePart.innerText = type.name[lang]?.toUpperCase();
     postHeader.appendChild(typePart);
   }
 
   if (all) {
-    const divider = document.createElement('div');
+    const divider = document.createElement('span');
 
     divider.classList.add('post-header-title-divider');
     postHeader.appendChild(divider);
   }
 
   if (category) {
-    const categoryPart = document.createElement('div');
+    const categoryPart = document.createElement('span');
 
     categoryPart.innerText = category.name[lang]?.toUpperCase();
     postHeader.appendChild(categoryPart);
@@ -352,10 +352,53 @@ const renderTitle = options => {
 };
 
 /**
+ * Truncates HTML formatted text
+ *
+ * @param {string} html
+ * @param {number} maxCharacters
+ * @returns {{truncated: boolean, html: string}}
+ */
+const truncateHTML = (html, maxCharacters) => {
+  const div = document.createElement('div');
+  let currentLength = 0;
+  let ellipsisAdded = false;
+
+  div.innerHTML = html;
+
+  function truncateNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      if (currentLength + node.length > maxCharacters) {
+        node.data = node.data.substring(0, maxCharacters - currentLength)
+          + '...';
+        ellipsisAdded = true;
+      } else {
+        currentLength += node.length;
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.tagName === 'BLOCKQUOTE') {
+        return;
+      }
+
+      for (let i = 0; i < node.childNodes.length; i++) {
+        if (ellipsisAdded) {
+          node.removeChild(node.childNodes[i--]);
+        } else {
+          truncateNode(node.childNodes[i]);
+        }
+      }
+    }
+  }
+
+  truncateNode(div);
+
+  return { truncated: ellipsisAdded, html: div.innerHTML };
+};
+
+/**
  * Renders post description
  *
  * @param {PostRenderOptions} options
- * @returns {void}
+ * @returns {boolean}
  */
 const renderDescription = options => {
   const { rootElement, lang, post } = options;
@@ -363,7 +406,7 @@ const renderDescription = options => {
   const description = post.description;
 
   if (!description && !shortDescription) {
-    return;
+    return false;
   }
 
   const descriptionContainerElement = document.createElement('div');
@@ -373,20 +416,35 @@ const renderDescription = options => {
     const spaceElement = document.createElement('span');
 
     spaceElement.innerText = ' ';
-
     shortDescriptionElement.innerHTML = shortDescription[lang];
     descriptionContainerElement.append(shortDescriptionElement, spaceElement);
   }
 
   if (description) {
     const descriptionElement = document.createElement('span');
+    const fullHtml = description[lang];
 
-    descriptionElement.innerHTML = description[lang];
+    const { html, truncated } = options.short
+      ? truncateHTML(
+        fullHtml,
+        window.applicationConstants.maxDescriptionLength,
+      )
+      : { html: fullHtml, truncated: false }
+    ;
+
+    descriptionElement.innerHTML = html;
     descriptionContainerElement.appendChild(descriptionElement);
+
+    descriptionContainerElement.classList.add('post-description');
+    rootElement.appendChild(descriptionContainerElement);
+
+    return truncated;
   }
 
   descriptionContainerElement.classList.add('post-description');
   rootElement.appendChild(descriptionContainerElement);
+
+  return false;
 };
 
 /**
@@ -413,7 +471,7 @@ const renderAudio = options => {
   audioContainerElement.appendChild(audioIconElement);
 
   if (audio.name || audio.description) {
-    const postAudioText  = document.createElement('div');
+    const postAudioText = document.createElement('div');
 
     if (audio.name) {
       const audioNameElement = document.createElement('div');
@@ -496,7 +554,8 @@ const renderLink = options => {
   const linkTextElement = document.createElement('div');
   const linkIconElement = document.createElement('div');
 
-  linkTextElement.innerText = 'ВІДКРИТИ ПОСИЛАННЯ';
+  linkTextElement.innerText =
+    window.applicationConstants.localization[lang]['post-link-text'];
   linkTextElement.setAttribute('data-localization-key', 'post-link-text');
   linkIconElement.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
@@ -511,18 +570,43 @@ const renderLink = options => {
   rootElement.appendChild(linkContainerElement);
 };
 
-function renderPostElements(post, lang) {
+/**
+ * Renders post open full button
+ *
+ * @param {PostRenderOptions} options
+ * @returns {void}
+ */
+const renderOpenFull = options => {
+  const { rootElement, lang } = options;
+  const textElement = document.createElement('div');
+  const iconElement = document.createElement('div');
+  const containerElement = document.createElement('div');
+
+  textElement.innerText =
+    window.applicationConstants.localization[lang]['post-open-full'];
+  textElement.setAttribute('data-localization-key', 'post-open-full');
+  iconElement.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+  `;
+
+  containerElement.append(textElement, iconElement);
+  containerElement.classList.add('post-open-full');
+  rootElement.appendChild(containerElement);
+};
+
+function renderPostElements(post, lang, short) {
   const headerElement = document.createElement('div');
   const headerTextElement = document.createElement('div');
   const mediaElement = document.createElement('div');
   const bodyElement = document.createElement('div');
   const dividerElement = document.createElement('div');
-  const partialOptions = { post, lang };
+  const partialOptions = { post, lang, short };
 
   headerElement.classList.add('post-header');
   mediaElement.classList.add('post-media');
   bodyElement.classList.add('post-body');
   dividerElement.classList.add('post-divider');
+  headerTextElement.classList.add('post-header-title-wrapper');
 
   const headerOptions = {
     ...partialOptions,
@@ -549,10 +633,14 @@ function renderPostElements(post, lang) {
   renderImage(mediaOptions);
   renderVideo(mediaOptions);
   renderTitle(bodyOptions);
-  renderDescription(bodyOptions);
+  const shortened = renderDescription(bodyOptions);
   renderQuote(bodyOptions);
   renderAudio(bodyOptions);
-  // renderOpenFull(bodyOptions);
+
+  if (shortened) {
+    renderOpenFull(bodyOptions);
+  }
+
   renderLink(bodyOptions);
 
   return {
@@ -567,16 +655,15 @@ function renderPostElements(post, lang) {
  * Get array of posts from website data
  *
  * @param {Post} post
- * @param {'uk' | 'en'} lang
+ * @param {'uk' | 'en'} [lang]
+ * @param {boolean} [short]
  * @returns {HTMLElement}
  */
-const createPost = (post, lang = 'uk') => {
+const createPost = (post, lang = 'uk', short = true) => {
   const rootElement = document.createElement('div');
 
   rootElement.classList.add('post-container');
-  rootElement.append(
-    ...Object.values(renderPostElements(post, lang, rootElement)),
-  );
+  rootElement.append(...Object.values(renderPostElements(post, lang, short)));
   rootElement.setAttribute('data-post-id', post.id);
   rootElement.addEventListener('click', () => {
     window.history.pushState({}, '', `/post/${ post.path || post.id }`);
@@ -678,7 +765,7 @@ window.addEventListener('resize', async () => {
     window.applicationState.isDesktop === desktop &&
     window.applicationState.isTablet === tablet
   ) {
-    return ;
+    return;
   }
 
   await renderPosts(
@@ -709,8 +796,10 @@ const openPost = async path => {
   }
 
   const lang = window.applicationState.language;
-  const [headerContainer] = postModal.getElementsByClassName('simple-modal-title');
-  const [contentContainer] = postModal.getElementsByClassName('simple-modal-content');
+  const [headerContainer] = postModal.getElementsByClassName(
+    'simple-modal-title');
+  const [contentContainer] = postModal.getElementsByClassName(
+    'simple-modal-content');
   const headerWrapper = document.createElement('div');
   const contentWrapper = document.createElement('div');
 
