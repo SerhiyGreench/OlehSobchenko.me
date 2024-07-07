@@ -9,6 +9,7 @@
   --border-width: 6px;
   --main-content-spacing: 64px;
   --main-part-height: 100vh;
+  --vh: 1ch;
   --with-address-bar-height: calc(var(--vh, 1vh) * 100);
   --main-part-background-size: calc(var(--vh, 1vh) * 65);
   --main-part-background-position-x: 75%;
