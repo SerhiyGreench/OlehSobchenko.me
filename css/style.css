@@ -119,8 +119,8 @@ blockquote:before {
   z-index: 10000;
   background-color: var(--bg-color);
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   max-width: 1920px;
   margin: 0 auto;
 }
