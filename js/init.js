@@ -126,3 +126,14 @@ Object.assign(window, {
   applicationConstants,
   applicationOperations,
 });
+
+function setDynamicVh() {
+  const vh = window.innerHeight * 0.01;
+
+  document.documentElement.style.setProperty('--vh', `${ vh }px`);
+}
+
+setDynamicVh();
+
+window.addEventListener('resize', setDynamicVh);
+document.querySelector('.simple-modal').style.height = 'calc(var(--vh, 1vh) * 100)';
