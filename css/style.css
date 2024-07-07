@@ -509,7 +509,7 @@ input[type="range"]::-ms-thumb {
   :root {
     --border-width: 4px;
     --main-content-spacing: 30px;
-    --main-part-background-size: 50vh;
+    --main-part-background-size: calc(var(--vh, 1vh) * 50);
     --main-part-background-position-x: 50%;
     --h1-custom-font-size: 56px;
     --h2-custom-font-size: 26px;
