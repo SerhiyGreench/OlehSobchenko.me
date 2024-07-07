@@ -9,9 +9,8 @@
   --border-width: 6px;
   --main-content-spacing: 64px;
   --main-part-height: 100vh;
-  --main-part-height-dynamic: 100dvh;
   --with-address-bar-height: calc(var(--vh, 1vh) * 100);
-  --main-part-background-size: 65vh;
+  --main-part-background-size: calc(var(--vh, 1vh) * 65);
   --main-part-background-position-x: 75%;
   --display-dark-theme-icon: block;
   --display-light-theme-icon: none;
@@ -192,8 +191,7 @@ body.simple-modal-open {
 }
 
 #main-part {
-  height: var(--main-part-height-dynamic);
-  height: var(--main-part-height);
+  height: var(--with-address-bar-height);
   width: 100%;
   background-image: linear-gradient(to bottom, var(--gradient-background-color-start) 80%, var(--gradient-background-color-end)), url("/img/main-photo.svg");
   background-repeat: no-repeat;
@@ -680,7 +678,6 @@ input[type="range"]::-ms-thumb {
 @media (min-height: 1080px) {
   :root {
     --main-part-height: 1080px;
-    --main-part-height-dynamic: 1080px;
     --main-part-background-size: 720px;
   }
 }
