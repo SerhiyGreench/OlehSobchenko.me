@@ -215,15 +215,15 @@
 
   .post-modal-content-wrapper {
     .post-title {
-      font-size: 42px;
+      font-size: 48px;
     }
 
     .post-description {
-      font-size: 20px;
+      font-size: 26px;
     }
 
     .post-quote {
-      font-size: 24px;
+      font-size: 28px;
     }
   }
 }
