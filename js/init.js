@@ -1,6 +1,42 @@
+class State {
+  constructor(initialState) {
+    this.state = initialState;
+    this.listeners = [];
+  }
+
+  set(newState) {
+    this.state = newState;
+    this.notify();
+  }
+
+  get() {
+    return this.state;
+  }
+
+  subscribe(listener) {
+    this.listeners.push(listener);
+  }
+
+  unsubscribe(listener) {
+    this.listeners = this.listeners.filter(l => l !== listener);
+  }
+
+  notify() {
+    this.listeners.forEach(listener => listener(this.state));
+  }
+}
+
+const isDark = window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
+const initialTheme = window.localStorage.getItem('theme') ||
+  (isDark ? 'dark' : 'light');
+
 const applicationState = {
-  language: window.localStorage.getItem('language') || 'uk',
-  postsCache: null,
+  theme: new State(initialTheme),
+  language: new State(
+    window.localStorage.getItem('language') || 'uk'
+  ),
+  postsCache: new State(null),
 };
 
 const applicationConstants = {
@@ -137,4 +173,12 @@ window.addEventListener('resize', () => {
   const vh = window.innerHeight * 0.01;
 
   document.documentElement.style.setProperty('--vh', `${ vh }px`);
+});
+
+window.applicationState.language.subscribe(state => {
+  window.localStorage.setItem('language', state);
+});
+
+window.applicationState.theme.subscribe(state => {
+  window.localStorage.setItem('theme', state);
 });
