@@ -235,7 +235,7 @@ body.simple-modal-open {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: top 400ms ease-out;
+  transition: top 400ms ease;
 }
 
 #scroll-down-button-container svg {
