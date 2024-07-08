@@ -28,8 +28,8 @@
 
 .post-divider {
   margin: 30px 0 0;
-  border-bottom: 10px solid var(--main-color);
-  opacity: 0.15;
+  border-bottom: 8px solid var(--main-color);
+  opacity: 0.1;
 }
 
 .post-header-title {
