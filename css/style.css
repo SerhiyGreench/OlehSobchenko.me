@@ -193,7 +193,6 @@ body.simple-modal-open {
 #main-part {
   height: var(--main-part-height);
   width: 100%;
-  background-image: linear-gradient(to bottom, var(--gradient-background-color-start) 80%, var(--gradient-background-color-end)), url("/img/main-photo.svg");
   background-repeat: no-repeat;
   background-position-x: var(--main-part-background-position-x);
   background-position-y: calc(100% + 2px);
