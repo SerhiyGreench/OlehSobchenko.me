@@ -800,7 +800,6 @@ const openPost = async path => {
   }
 
   const lang = window.applicationState.language.get();
-  console.log({ lang });
 
   const [headerContainer] = postModal.getElementsByClassName(
     'simple-modal-title');
