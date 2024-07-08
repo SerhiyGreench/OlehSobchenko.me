@@ -59,11 +59,7 @@ const handleLanguageSwitch = () => {
   }
 
   const lang = switcher.getAttribute('data-translate-to');
-  const alternateLang = lang === 'uk' ? 'en' : 'uk';
-
   handleLocalize(lang);
-
-  switcher.setAttribute('data-translate-to', alternateLang);
 };
 
 window.applicationState.language.subscribe(lang => {
@@ -117,6 +113,16 @@ const renderLanguageChange = (lang) => {
       }
     }
   }
+
+  const switcher = document.querySelector('#language-switcher');
+
+  if (!switcher) {
+    return;
+  }
+
+  const alternateLang = lang === 'uk' ? 'en' : 'uk';
+
+  switcher.setAttribute('data-translate-to', alternateLang);
 };
 
 const handleScrollDownScreenHeight = () => {

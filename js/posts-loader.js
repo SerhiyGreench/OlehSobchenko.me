@@ -709,11 +709,21 @@ const renderMasonry = (items, columnsNumber = 2) => {
   return masonryContainer;
 };
 
+const isDesktop = () => {
+  return document.body.clientWidth >
+    window.applicationConstants.mobileBreakpoint;
+};
+
+const isTablet = () => {
+  return document.body.clientWidth <
+    window.applicationConstants.tabletBreakpoint;
+};
+
 const renderPosts = async (
   containerId,
   lang = 'uk',
-  desktop = window.applicationState.isDesktop,
-  columns = window.applicationState.isTablet ? 2 : 3,
+  desktop = isDesktop(),
+  columns = isTablet() ? 2 : 3,
 ) => {
   const posts = await getPosts();
   const postElements = posts.map(post => createPost(post, lang));
@@ -735,18 +745,8 @@ const renderPosts = async (
   container.replaceChildren(newPostsElementsContainer);
 };
 
-const isDesktop = () => {
-  return document.body.clientWidth >
-    window.applicationConstants.mobileBreakpoint;
-};
-
-const isTablet = () => {
-  return document.body.clientWidth <
-    window.applicationConstants.tabletBreakpoint;
-};
-
 const initialPostsRendering = () => {
-  const lang = window.applicationState.language;
+  const lang = window.applicationState.language.get();
 
   window.addEventListener('load', async () => {
     await renderPosts(
@@ -759,7 +759,7 @@ const initialPostsRendering = () => {
 };
 
 window.addEventListener('resize', async () => {
-  const lang = window.applicationState.language;
+  const lang = window.applicationState.language.get();
   const desktop = isDesktop();
   const tablet = isTablet();
 
@@ -781,7 +781,9 @@ window.addEventListener('resize', async () => {
   window.applicationState.isTablet = isTablet();
 });
 
-initialPostsRendering();
+window.addEventListener('load', () => {
+  initialPostsRendering();
+});
 
 const openPost = async path => {
   const posts = await getPosts();
@@ -797,7 +799,7 @@ const openPost = async path => {
     return;
   }
 
-  const lang = window.applicationState.language;
+  const lang = window.applicationState.language.get();
   const [headerContainer] = postModal.getElementsByClassName(
     'simple-modal-title');
   const [contentContainer] = postModal.getElementsByClassName(

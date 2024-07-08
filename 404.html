@@ -109,8 +109,8 @@
           <div class="main-action-bar">
             <div id="language-switcher"
                  class="text-button language-button desktop"
-                 onclick="handleLocalize()" data-localization-key="language"
-                 data-translate-to="en" data-translate-from="uk">
+                 onclick="handleLanguageSwitch()" data-localization-key="language"
+                 data-translate-to="en">
               ENG
             </div>
             <div class="icon-button mobile"
@@ -441,8 +441,9 @@
     </div>
     <div class="simple-modal-content">
       <div class="full-language-selector">
-        <div id="language-item-uk" class="selector-language-item selected"
-             data-language-item="uk" onclick="handleLanguageSelect('uk')">
+        <div id="language-item-uk"
+             class="selector-language-item selected"
+             data-language-item="uk">
           <div class="selector-language-name">Українська</div>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                viewBox="0 -960 960 960" width="24px">
@@ -450,8 +451,9 @@
               d="M382-221.91 135.91-468l75.66-75.65L382-373.22l366.43-366.43L824.09-664 382-221.91Z"/>
           </svg>
         </div>
-        <div id="language-item-en" class="selector-language-item"
-             data-language-item="en" onclick="handleLanguageSelect('en')">
+        <div id="language-item-en"
+             class="selector-language-item"
+             data-language-item="en">
           <div class="selector-language-name">English</div>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                viewBox="0 -960 960 960" width="24px">
